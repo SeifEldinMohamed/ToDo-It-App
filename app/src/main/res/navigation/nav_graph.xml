@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/toDoListFragment">
+
+    <fragment
+        android:id="@+id/toDoListFragment"
+        android:name="com.seif.todoit.ToDoListFragment"
+        android:label="fragment_to_do_list"
+        tools:layout="@layout/fragment_to_do_list" >
+        <action
+            android:id="@+id/action_toDoListFragment_to_addTodoFragment"
+            app:destination="@id/addTodoFragment" />
+        <action
+            android:id="@+id/action_toDoListFragment_to_updateTodoFragment"
+            app:destination="@id/updateTodoFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTodoFragment"
+        android:name="com.seif.todoit.AddTodoFragment"
+        android:label="fragment_add_todo"
+        tools:layout="@layout/fragment_add_todo" >
+        <action
+            android:id="@+id/action_addTodoFragment_to_toDoListFragment"
+            app:destination="@id/toDoListFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/updateTodoFragment"
+        android:name="com.seif.todoit.UpdateTodoFragment"
+        android:label="fragment_update_todo"
+        tools:layout="@layout/fragment_update_todo" >
+        <action
+            android:id="@+id/action_updateTodoFragment_to_toDoListFragment"
+            app:destination="@id/toDoListFragment" />
+    </fragment>
+</navigation>
