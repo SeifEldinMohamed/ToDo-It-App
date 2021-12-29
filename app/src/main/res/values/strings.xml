@@ -1,8 +1,22 @@
 <resources>
     <string name="app_name">To Do It</string>
-    <!-- TODO: Remove or change this placeholder text -->
+
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_tasks_enjoy_your_time">No Tasks, Enjoy Your Time</string>
     <string name="image_when_there_is_no_tasks">image when there is no tasks</string>
     <string name="icon_in_flaating_action_botton">icon in flaating action botton</string>
+    <string name="hint_title">Title</string>
+    <string name="hint_description">Description</string>
+    <string name="study_title_test">Study</string>
+    <string name="description_test">- Math \n- analysis \n- software</string>
+    <string name="search_menu">search</string>
+    <string name="high_priority_menu">High Priority</string>
+    <string name="low_priority_menu">Low Priority</string>
+    <string name="delete_all_menu">Delete All</string>
+    <string name="sort_by_menu">Sort By</string>
+    <string-array name="spinner_items">
+        <item>High Priority</item>
+        <item>Medium Priority</item>
+        <item>Low Priority</item>
+    </string-array>
 </resources>

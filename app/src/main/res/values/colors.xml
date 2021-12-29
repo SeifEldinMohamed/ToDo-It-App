@@ -4,6 +4,7 @@
     <color name="colorPrimary">#0813A6</color>
 
     <color name="darkGray">#7E7E7E</color>
+    <color name="lightGray">#E6E6E6</color>
     <color name="green">#26DA00</color>
     <color name="red">#D50000</color>
     <color name="yellow">#FFBC00</color>
