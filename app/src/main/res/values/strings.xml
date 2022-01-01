@@ -14,6 +14,8 @@
     <string name="low_priority_menu">Low Priority</string>
     <string name="delete_all_menu">Delete All</string>
     <string name="sort_by_menu">Sort By</string>
+    <string name="add_todo_menu">Add Todo</string>
+    <string name="save_todo_menu">Save Todo</string>
     <string-array name="spinner_items">
         <item>High Priority</item>
         <item>Medium Priority</item>

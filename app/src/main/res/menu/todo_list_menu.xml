@@ -8,7 +8,7 @@
     app:actionViewClass="androidx.appcompat.widget.SearchView"
     >
 </item>
-    <group android:checkableBehavior="single">
+    <group >
     <item android:id="@+id/menu_sort_by"
         android:title="@string/sort_by_menu">
         <menu>
@@ -20,8 +20,9 @@
                 android:title="@string/low_priority_menu" />
         </menu>
     </item>
-        <item
-            android:id="@+id/menu_delete_all"
-            android:title="@string/delete_all_menu" />
     </group>
+    <item
+        android:id="@+id/menu_delete_all"
+        android:title="@string/delete_all_menu"
+        />
 </menu>
