@@ -12,10 +12,18 @@
         tools:layout="@layout/fragment_to_do_list" >
         <action
             android:id="@+id/action_toDoListFragment_to_addTodoFragment"
-            app:destination="@id/addTodoFragment" />
+            app:destination="@id/addTodoFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/to_left"
+            app:popEnterAnim="@anim/from_left"
+            app:popExitAnim="@anim/to_right" />
         <action
             android:id="@+id/action_toDoListFragment_to_updateTodoFragment"
-            app:destination="@id/updateTodoFragment" />
+            app:destination="@id/updateTodoFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right"
+            app:popEnterAnim="@anim/from_right"
+            app:popExitAnim="@anim/to_left" />
     </fragment>
     <fragment
         android:id="@+id/addTodoFragment"
@@ -24,7 +32,9 @@
         tools:layout="@layout/fragment_add_todo" >
         <action
             android:id="@+id/action_addTodoFragment_to_toDoListFragment"
-            app:destination="@id/toDoListFragment" />
+            app:destination="@id/toDoListFragment"
+            app:enterAnim="@anim/from_left"
+            app:exitAnim="@anim/to_right" />
     </fragment>
     <fragment
         android:id="@+id/updateTodoFragment"
@@ -33,6 +43,8 @@
         tools:layout="@layout/fragment_update_todo" >
         <action
             android:id="@+id/action_updateTodoFragment_to_toDoListFragment"
-            app:destination="@id/toDoListFragment" />
+            app:destination="@id/toDoListFragment"
+            app:enterAnim="@anim/from_right"
+            app:exitAnim="@anim/from_left" />
     </fragment>
 </navigation>

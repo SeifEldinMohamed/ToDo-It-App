@@ -3,17 +3,18 @@ package com.seif.todoit
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
+import com.seif.todoit.databinding.FragmentAddTodoBinding
 import com.seif.todoit.databinding.FragmentToDoListBinding
 
 
 class AddTodoFragment : Fragment() {
-    lateinit var binding : FragmentToDoListBinding
+    lateinit var binding : FragmentAddTodoBinding
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentToDoListBinding.inflate(inflater, container, false)
+        binding = FragmentAddTodoBinding.inflate(inflater, container, false)
         return binding.root
     }
 
