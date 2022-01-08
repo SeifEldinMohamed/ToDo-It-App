@@ -1,9 +1,10 @@
-package com.seif.todoit
+package com.seif.todoit.ui.fragments
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
 import androidx.navigation.fragment.findNavController
+import com.seif.todoit.R
 import com.seif.todoit.databinding.FragmentToDoListBinding
 
 

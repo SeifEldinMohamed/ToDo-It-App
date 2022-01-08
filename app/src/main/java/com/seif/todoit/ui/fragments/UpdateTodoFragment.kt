@@ -1,21 +1,19 @@
-package com.seif.todoit
+package com.seif.todoit.ui.fragments
 
 import android.os.Bundle
 import android.view.*
 import androidx.fragment.app.Fragment
-import com.seif.todoit.databinding.FragmentAddTodoBinding
-import com.seif.todoit.databinding.FragmentToDoListBinding
+import com.seif.todoit.R
 
 
-class AddTodoFragment : Fragment() {
-    lateinit var binding : FragmentAddTodoBinding
+class UpdateTodoFragment : Fragment() {
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
-    ): View {
+    ): View? {
         // Inflate the layout for this fragment
-        binding = FragmentAddTodoBinding.inflate(inflater, container, false)
-        return binding.root
+        return inflater.inflate(R.layout.fragment_update_todo, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -25,6 +23,7 @@ class AddTodoFragment : Fragment() {
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.add_fragment_menu, menu)
+        inflater.inflate(R.menu.update_fragment_menu, menu)
     }
+
 }

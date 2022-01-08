@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/toDoListFragment"
-        android:name="com.seif.todoit.ToDoListFragment"
+        android:name="com.seif.todoit.ui.fragments.ToDoListFragment"
         android:label="fragment_to_do_list"
         tools:layout="@layout/fragment_to_do_list" >
         <action
@@ -27,7 +27,7 @@
     </fragment>
     <fragment
         android:id="@+id/addTodoFragment"
-        android:name="com.seif.todoit.AddTodoFragment"
+        android:name="com.seif.todoit.ui.fragments.AddTodoFragment"
         android:label="fragment_add_todo"
         tools:layout="@layout/fragment_add_todo" >
         <action
@@ -38,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/updateTodoFragment"
-        android:name="com.seif.todoit.UpdateTodoFragment"
+        android:name="com.seif.todoit.ui.fragments.UpdateTodoFragment"
         android:label="fragment_update_todo"
         tools:layout="@layout/fragment_update_todo" >
         <action
