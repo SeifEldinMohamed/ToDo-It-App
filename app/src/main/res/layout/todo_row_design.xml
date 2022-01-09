@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:layout_margin="8dp">
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -37,8 +37,8 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="16dp"
-            android:text="Todo Title"
             android:maxLength="20"
+            android:text="@string/todo_title_row"
             android:textColor="#000000"
             android:textSize="22sp"
             android:textStyle="bold"
@@ -55,7 +55,7 @@
             android:layout_marginBottom="16dp"
             android:maxWidth="360dp"
             android:maxLines="10"
-            android:text="todo description test slkfdjasdjf;lasjdflaskdfjl;kasjdfl;kasjfkljasdlkfjasl;dfkjasd fiowuhnvl[sajvn wqgfmasdfgjaiswkfjasd fsdjfaklsjdf"
+            android:text="@string/todo_description_row"
             android:textColor="@color/darkGray"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
