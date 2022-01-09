@@ -9,7 +9,7 @@
     tools:context=".ui.fragments.AddTodoFragment">
 
     <EditText
-        android:id="@+id/editTextTextPersonName"
+        android:id="@+id/title_edit"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="20dp"
@@ -28,7 +28,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <Spinner
-        android:id="@+id/spinner"
+        android:id="@+id/priority_spinner"
         android:layout_width="0dp"
         android:layout_height="55dp"
         android:layout_marginStart="20dp"
@@ -42,10 +42,10 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextTextPersonName" />
+        app:layout_constraintTop_toBottomOf="@+id/title_edit" />
 
     <EditText
-        android:id="@+id/editTextTextMultiLine"
+        android:id="@+id/description_edit"
         android:layout_width="0dp"
         android:layout_height="0dp"
         android:layout_marginStart="20dp"
@@ -64,5 +64,5 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/priority_spinner" />
 </androidx.constraintlayout.widget.ConstraintLayout>
