@@ -58,7 +58,7 @@ class AddTodoFragment : Fragment() {
         val priority = binding.prioritySpinner.selectedItem.toString()
         val todoDescription = binding.descriptionEdit.text.toString()
        if(sharedViewModel.validateTodo(todoTitle, todoDescription)){
-           // insert todo in database
+           // insert in database
            val todo = TodoModel(
                0,
                todoTitle,

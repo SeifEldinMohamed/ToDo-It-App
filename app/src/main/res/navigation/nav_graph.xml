@@ -46,5 +46,8 @@
             app:destination="@id/toDoListFragment"
             app:enterAnim="@anim/from_right"
             app:exitAnim="@anim/from_left" />
+        <argument
+            android:name="currentTodo"
+            app:argType="com.seif.todoit.data.models.TodoModel" />
     </fragment>
 </navigation>
