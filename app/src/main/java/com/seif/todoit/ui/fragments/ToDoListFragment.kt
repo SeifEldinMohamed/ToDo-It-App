@@ -16,8 +16,8 @@ import com.seif.todoit.ui.veiwmodels.TodoViewModel
 
 class ToDoListFragment : Fragment() {
     lateinit var binding: FragmentToDoListBinding
-    private val todoListAdapter:TodoListAdapter by lazy { TodoListAdapter() }
-    lateinit var todoViewModel:TodoViewModel
+    private val todoListAdapter: TodoListAdapter by lazy { TodoListAdapter() }
+    lateinit var todoViewModel: TodoViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

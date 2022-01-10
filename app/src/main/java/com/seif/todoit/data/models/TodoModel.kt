@@ -7,10 +7,10 @@ import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "todo_table")
 @Parcelize
-data class TodoModel (
+data class TodoModel(
     @PrimaryKey(autoGenerate = true)
-    var id:Int,
-    var title:String,
-    var priority:PriorityModel,
-    var description:String
-):Parcelable
+    var id: Int,
+    var title: String,
+    var priority: PriorityModel,
+    var description: String
+) : Parcelable

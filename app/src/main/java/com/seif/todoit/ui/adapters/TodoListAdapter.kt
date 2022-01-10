@@ -10,9 +10,10 @@ import com.seif.todoit.R
 import com.seif.todoit.data.models.PriorityModel
 import com.seif.todoit.data.models.TodoModel
 import com.seif.todoit.databinding.TodoRowDesignBinding
+import com.seif.todoit.ui.fragments.ToDoListFragmentDirections
 
 class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
-     var todoList = emptyList<TodoModel>()
+    var todoList = emptyList<TodoModel>()
 
     class MyViewHolder(val binding: TodoRowDesignBinding) : RecyclerView.ViewHolder(binding.root) {
 
@@ -30,7 +31,9 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
         holder.binding.todoDescriptionTxt.text = todoList[position].description
 
         holder.binding.todoItemCons.setOnClickListener {
-            holder.itemView.findNavController().navigate(R.id.action_toDoListFragment_to_updateTodoFragment)
+            val action =
+                ToDoListFragmentDirections.actionToDoListFragmentToUpdateTodoFragment(todoList[position])
+            holder.itemView.findNavController().navigate(action)
         }
 
         when (todoList[position].priority) {
@@ -58,8 +61,9 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
     override fun getItemCount(): Int {
         return todoList.size
     }
-    fun setData(todoList2:List<TodoModel>){
-      this.todoList = todoList2
+
+    fun setData(todoList2: List<TodoModel>) {
+        this.todoList = todoList2
         notifyDataSetChanged()
     }
 }

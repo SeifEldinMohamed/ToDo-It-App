@@ -9,14 +9,29 @@ import androidx.lifecycle.AndroidViewModel
 import com.seif.todoit.R
 import com.seif.todoit.data.models.PriorityModel
 
-class ShareViewModel(application: Application):AndroidViewModel(application) {
+class ShareViewModel(application: Application) : AndroidViewModel(application) {
 
-    val listener: AdapterView.OnItemSelectedListener = object :AdapterView.OnItemSelectedListener{
+    val listener: AdapterView.OnItemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
-            when(position){
-                0 -> (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.red))
-                1 -> (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.yellow))
-                2 -> (parent?.getChildAt(0) as TextView).setTextColor(ContextCompat.getColor(application, R.color.green))
+            when (position) {
+                0 -> (parent?.getChildAt(0) as TextView).setTextColor(
+                    ContextCompat.getColor(
+                        application,
+                        R.color.red
+                    )
+                )
+                1 -> (parent?.getChildAt(0) as TextView).setTextColor(
+                    ContextCompat.getColor(
+                        application,
+                        R.color.yellow
+                    )
+                )
+                2 -> (parent?.getChildAt(0) as TextView).setTextColor(
+                    ContextCompat.getColor(
+                        application,
+                        R.color.green
+                    )
+                )
 
             }
         }
@@ -27,8 +42,8 @@ class ShareViewModel(application: Application):AndroidViewModel(application) {
 
     }
 
-     fun getPriority(priority: String): PriorityModel {
-        return when(priority){
+    fun getPriority(priority: String): PriorityModel {
+        return when (priority) {
             "Low Priority" -> PriorityModel.LOW
             "Medium Priority" -> PriorityModel.MEDIUM
             "High Priority" -> PriorityModel.HIGH
@@ -37,7 +52,7 @@ class ShareViewModel(application: Application):AndroidViewModel(application) {
 
     }
 
-     fun validateTodo(todoTitle: String, todoDescription: String):Boolean {
+    fun validateTodo(todoTitle: String, todoDescription: String): Boolean {
         return (todoTitle.isNotEmpty() || todoDescription.isNotEmpty())
     }
 }
