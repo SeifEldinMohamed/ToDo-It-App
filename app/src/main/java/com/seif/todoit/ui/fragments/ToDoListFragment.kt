@@ -45,9 +45,6 @@ class ToDoListFragment : Fragment() {
         binding.btnAddTodo.setOnClickListener {
             findNavController().navigate(R.id.action_toDoListFragment_to_addTodoFragment)
         }
-        binding.constraintLayout.setOnClickListener {
-            findNavController().navigate(R.id.action_toDoListFragment_to_updateTodoFragment)
-        }
 
     }
 
