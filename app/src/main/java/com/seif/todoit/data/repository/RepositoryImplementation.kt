@@ -16,4 +16,8 @@ class RepositoryImplementation(private val todoDao: TodoDao) :Repository {
     override suspend fun updateTodo(todo: TodoModel) {
         todoDao.updateTodo(todo)
     }
+
+    override suspend fun deleteTodo(todo: TodoModel) {
+        todoDao.deleteTodo(todo)
+    }
 }

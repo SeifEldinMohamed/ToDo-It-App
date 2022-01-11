@@ -7,4 +7,5 @@ interface Repository {
     fun getAllToDos(): LiveData<List<TodoModel>>
     suspend fun addTodo(todo:TodoModel)
     suspend fun updateTodo(todo: TodoModel)
+    suspend fun deleteTodo(todo: TodoModel)
 }

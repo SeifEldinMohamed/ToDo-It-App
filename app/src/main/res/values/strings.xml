@@ -18,6 +18,7 @@
     <string name="save_todo_menu">Save Todo</string>
     <string name="todo_title_row">Todo Title</string>
     <string name="todo_description_row">todo description</string>
+    <string name="delete_todo_update">Delete</string>
     <string-array name="spinner_items">
         <item>High Priority</item>
         <item>Medium Priority</item>
