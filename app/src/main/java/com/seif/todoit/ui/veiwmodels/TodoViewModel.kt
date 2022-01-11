@@ -17,7 +17,12 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
 
     fun insertTodo(todoModel: TodoModel) {
         viewModelScope.launch(Dispatchers.IO) {
-            todoDao.addTodo(todoModel)
+            repository.addTodo(todoModel)
+        }
+    }
+    fun updateTodo(todoModel: TodoModel){
+        viewModelScope.launch(Dispatchers.IO) {
+            repository.updateTodo(todoModel)
         }
     }
 

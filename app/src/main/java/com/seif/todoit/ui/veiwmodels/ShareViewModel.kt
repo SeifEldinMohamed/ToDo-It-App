@@ -55,4 +55,11 @@ class ShareViewModel(application: Application) : AndroidViewModel(application) {
     fun validateTodo(todoTitle: String, todoDescription: String): Boolean {
         return (todoTitle.isNotEmpty() || todoDescription.isNotEmpty())
     }
+     fun parsePriorityToInt(priorityModel: PriorityModel): Int {
+        return when (priorityModel) {
+            PriorityModel.HIGH -> 0
+            PriorityModel.MEDIUM -> 1
+            PriorityModel.LOW -> 2
+        }
+    }
 }

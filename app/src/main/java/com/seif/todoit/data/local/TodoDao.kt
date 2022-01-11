@@ -1,10 +1,7 @@
 package com.seif.todoit.data.local
 
 import androidx.lifecycle.LiveData
-import androidx.room.Dao
-import androidx.room.Insert
-import androidx.room.OnConflictStrategy
-import androidx.room.Query
+import androidx.room.*
 import com.seif.todoit.data.models.TodoModel
 
 @Dao
@@ -14,4 +11,7 @@ interface TodoDao {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun addTodo(todo:TodoModel)
+
+    @Update
+    suspend fun updateTodo(todo: TodoModel)
 }
