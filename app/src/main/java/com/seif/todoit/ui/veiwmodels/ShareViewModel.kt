@@ -6,10 +6,16 @@ import android.widget.AdapterView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
+import androidx.lifecycle.MutableLiveData
 import com.seif.todoit.R
 import com.seif.todoit.data.models.PriorityModel
+import com.seif.todoit.data.models.TodoModel
 
 class ShareViewModel(application: Application) : AndroidViewModel(application) {
+     var emptyDataBase :MutableLiveData<Boolean> = MutableLiveData(true)
+    fun checkDatabaseEmpty(todoData: List<TodoModel>){
+        emptyDataBase.value = todoData.isEmpty()
+    }
 
     val listener: AdapterView.OnItemSelectedListener = object : AdapterView.OnItemSelectedListener {
         override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
