@@ -8,4 +8,5 @@ interface Repository {
     suspend fun addTodo(todo:TodoModel)
     suspend fun updateTodo(todo: TodoModel)
     suspend fun deleteTodo(todo: TodoModel)
+    suspend fun deleteAllToDos()
 }

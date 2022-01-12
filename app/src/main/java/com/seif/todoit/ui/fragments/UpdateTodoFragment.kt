@@ -67,7 +67,6 @@ class UpdateTodoFragment : Fragment() {
             setMessage("Are you sure you want to delete '${fromBundle(requireArguments()).currentTodo.title}' ?")
             create().show()
         }
-
     }
 
     private fun updateTodoItem() {

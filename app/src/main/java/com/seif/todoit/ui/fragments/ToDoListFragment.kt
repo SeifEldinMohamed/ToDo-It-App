@@ -1,12 +1,13 @@
 package com.seif.todoit.ui.fragments
 
+import android.app.AlertDialog
 import android.os.Bundle
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.seif.todoit.R
 import com.seif.todoit.databinding.FragmentToDoListBinding
@@ -36,11 +37,19 @@ class ToDoListFragment : Fragment() {
         todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
         todoViewModel.getAllToDos.observe(viewLifecycleOwner, Observer { data ->
             todoListAdapter.setData(data)
+            // handle appearance of no tasks image and text
+            if(data.isEmpty()){
+                binding.noTasksImage.visibility = View.VISIBLE
+                binding.noTasksTxt.visibility = View.VISIBLE
+            }
+            else{
+                binding.noTasksImage.visibility = View.GONE
+                binding.noTasksTxt.visibility = View.GONE
+            }
         })
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = todoListAdapter
-        binding.noTasksImage.visibility = View.GONE
-        binding.noTasksTxt.visibility = View.GONE
+
 
         binding.btnAddTodo.setOnClickListener {
             findNavController().navigate(R.id.action_toDoListFragment_to_addTodoFragment)
@@ -50,6 +59,27 @@ class ToDoListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.todo_list_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if(item.itemId == R.id.menu_delete_all){
+            confirmDeleteAll()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun confirmDeleteAll() {
+        val builder = AlertDialog.Builder(requireContext())
+        builder.setPositiveButton("Ok"){ _,_ ->
+            todoViewModel.deleteAllToDos()
+            Toast.makeText(requireContext(), "Delete all items successfully", Toast.LENGTH_SHORT).show()
+        }
+        with(builder){
+            setNegativeButton("Cancel"){_,_ ->}
+            setTitle("Delete Everything ?")
+            setMessage("Are you sure you want to remove everything ?")
+            create().show()
+        }
     }
 
 

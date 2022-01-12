@@ -17,4 +17,7 @@ interface TodoDao {
 
     @Delete
     suspend fun deleteTodo(todo: TodoModel)
+
+    @Query("DELETE FROM todo_table")
+    suspend fun deleteAllToDos()
 }
