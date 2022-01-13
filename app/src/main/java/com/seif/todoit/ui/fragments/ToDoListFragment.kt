@@ -49,7 +49,6 @@ class ToDoListFragment : Fragment() {
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = todoListAdapter
 
-
         binding.btnAddTodo.setOnClickListener {
             findNavController().navigate(R.id.action_toDoListFragment_to_addTodoFragment)
         }
@@ -91,11 +90,8 @@ class ToDoListFragment : Fragment() {
             create().show()
         }
     }
-
 }
-
 /** setHasOptionMenu()
- * Report that this fragment would like to participate in populating
- * the options menu
+ * Report that this fragment would like to participate in populating the options menu
  * if parameter of hasMenu equals to  true, the fragment has menu items to contribute.
  */

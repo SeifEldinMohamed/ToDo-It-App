@@ -12,8 +12,8 @@ import com.seif.todoit.data.models.PriorityModel
 import com.seif.todoit.data.models.TodoModel
 
 class ShareViewModel(application: Application) : AndroidViewModel(application) {
-     var emptyDataBase :MutableLiveData<Boolean> = MutableLiveData(true)
-    fun checkDatabaseEmpty(todoData: List<TodoModel>){
+    var emptyDataBase: MutableLiveData<Boolean> = MutableLiveData(true)
+    fun checkDatabaseEmpty(todoData: List<TodoModel>) {
         emptyDataBase.value = todoData.isEmpty()
     }
 
@@ -38,14 +38,12 @@ class ShareViewModel(application: Application) : AndroidViewModel(application) {
                         R.color.green
                     )
                 )
-
             }
         }
 
         override fun onNothingSelected(parent: AdapterView<*>?) {
 
         }
-
     }
 
     fun getPriority(priority: String): PriorityModel {
@@ -55,13 +53,13 @@ class ShareViewModel(application: Application) : AndroidViewModel(application) {
             "High Priority" -> PriorityModel.HIGH
             else -> PriorityModel.HIGH
         }
-
     }
 
     fun validateTodo(todoTitle: String, todoDescription: String): Boolean {
         return (todoTitle.isNotEmpty() || todoDescription.isNotEmpty())
     }
-     fun parsePriorityToInt(priorityModel: PriorityModel): Int {
+
+    fun parsePriorityToInt(priorityModel: PriorityModel): Int {
         return when (priorityModel) {
             PriorityModel.HIGH -> 0
             PriorityModel.MEDIUM -> 1

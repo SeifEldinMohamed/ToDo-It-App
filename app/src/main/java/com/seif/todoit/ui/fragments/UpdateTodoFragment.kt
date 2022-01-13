@@ -18,7 +18,7 @@ import com.seif.todoit.ui.veiwmodels.TodoViewModel
 class UpdateTodoFragment : Fragment() {
     private lateinit var binding: FragmentUpdateTodoBinding
     private lateinit var shareViewModel: ShareViewModel
-    private lateinit var todoViewModel:TodoViewModel
+    private lateinit var todoViewModel: TodoViewModel
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -36,19 +36,24 @@ class UpdateTodoFragment : Fragment() {
         setHasOptionsMenu(true)
         binding.editTitleUpdate.setText(fromBundle(requireArguments()).currentTodo.title)
         binding.editDescriptionUpdate.setText(fromBundle(requireArguments()).currentTodo.description)
-        binding.spinnerUpdate.setSelection(shareViewModel.parsePriorityToInt(fromBundle(requireArguments()).currentTodo.priority))
+        binding.spinnerUpdate.setSelection(
+            shareViewModel.parsePriorityToInt(
+                fromBundle(
+                    requireArguments()
+                ).currentTodo.priority
+            )
+        )
         binding.spinnerUpdate.onItemSelectedListener = shareViewModel.listener
-        
     }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.update_fragment_menu, menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if(item.itemId == R.id.menu_save){
+        if (item.itemId == R.id.menu_save) {
             updateTodoItem()
-        }
-        else if(item.itemId == R.id.menu_delete){
+        } else if (item.itemId == R.id.menu_delete) {
             deleteTodoItem()
         }
         return super.onOptionsItemSelected(item)
@@ -56,13 +61,13 @@ class UpdateTodoFragment : Fragment() {
 
     private fun deleteTodoItem() {
         val builder = AlertDialog.Builder(requireContext())
-        builder.setPositiveButton("Ok"){ _,_ ->
+        builder.setPositiveButton("Ok") { _, _ ->
             todoViewModel.deleteTodo(fromBundle(requireArguments()).currentTodo)
             Toast.makeText(requireContext(), "deleted Successfully", Toast.LENGTH_SHORT).show()
             findNavController().navigate(R.id.action_updateTodoFragment_to_toDoListFragment)
         }
-        with(builder){
-            setNegativeButton("Cancel"){_,_ ->}
+        with(builder) {
+            setNegativeButton("Cancel") { _, _ -> }
             setTitle("Delete '${fromBundle(requireArguments()).currentTodo.title}' ?")
             setMessage("Are you sure you want to delete '${fromBundle(requireArguments()).currentTodo.title}' ?")
             create().show()
@@ -73,7 +78,7 @@ class UpdateTodoFragment : Fragment() {
         val currentTitle = binding.editTitleUpdate.text.toString()
         val currentPriority = binding.spinnerUpdate.selectedItem.toString()
         val currentDescription = binding.editDescriptionUpdate.text.toString()
-        if(shareViewModel.validateTodo(currentTitle,currentDescription)){
+        if (shareViewModel.validateTodo(currentTitle, currentDescription)) {
             val updateTodo = TodoModel(
                 fromBundle(requireArguments()).currentTodo.id,
                 currentTitle,
@@ -83,10 +88,8 @@ class UpdateTodoFragment : Fragment() {
             todoViewModel.updateTodo(updateTodo)
             findNavController().navigate(R.id.action_updateTodoFragment_to_toDoListFragment)
             Toast.makeText(requireContext(), "Updated Successfully", Toast.LENGTH_SHORT).show()
-        }
-        else{
+        } else {
             Toast.makeText(requireContext(), "please fill all fields", Toast.LENGTH_SHORT).show()
         }
     }
-
 }
