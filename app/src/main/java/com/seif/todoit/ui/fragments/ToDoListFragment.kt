@@ -17,7 +17,8 @@ import com.seif.todoit.ui.veiwmodels.TodoViewModel
 
 
 class ToDoListFragment : Fragment() {
-    lateinit var binding: FragmentToDoListBinding
+    private var _binding: FragmentToDoListBinding? = null
+    private val binding get() = _binding!!
     private val todoListAdapter: TodoListAdapter by lazy { TodoListAdapter() }
     lateinit var todoViewModel: TodoViewModel
     lateinit var shareViewModel: ShareViewModel
@@ -26,14 +27,7 @@ class ToDoListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        binding = FragmentToDoListBinding.inflate(inflater, container, false)
-
-
-        return binding.root
-    }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+        _binding = FragmentToDoListBinding.inflate(inflater,container,false)
         // set menu
         setHasOptionsMenu(true)
         shareViewModel = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
@@ -52,6 +46,12 @@ class ToDoListFragment : Fragment() {
         binding.btnAddTodo.setOnClickListener {
             findNavController().navigate(R.id.action_toDoListFragment_to_addTodoFragment)
         }
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+
 
     }
 
