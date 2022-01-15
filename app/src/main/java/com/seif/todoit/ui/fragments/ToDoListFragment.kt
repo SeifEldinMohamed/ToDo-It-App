@@ -8,6 +8,7 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.seif.todoit.R
@@ -49,6 +50,7 @@ class ToDoListFragment : Fragment() {
         })
         binding.recyclerView.layoutManager = LinearLayoutManager(context)
         binding.recyclerView.adapter = todoListAdapter
+        swipeToDelete(binding.recyclerView)
 
         binding.btnAddTodo.setOnClickListener {
             findNavController().navigate(R.id.action_toDoListFragment_to_addTodoFragment)
@@ -56,14 +58,16 @@ class ToDoListFragment : Fragment() {
 
     }
     private fun swipeToDelete(recyclerView: RecyclerView){
-        val swipeToDeleteCallBack = object :  SwipeToDelete(){
+        val swipeToDeleteCallBack:SwipeToDelete = object :  SwipeToDelete(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                super.onSwiped(viewHolder, direction)
                 val itemToDelete =  todoListAdapter.todoList[viewHolder.adapterPosition]
                 todoViewModel.deleteTodo(itemToDelete)
-                Toast.makeText(requireContext(), "deleted successfully ${itemToDelete.title}", Toast.LENGTH_SHORT).show()
+                Toast.makeText(requireContext(), "${itemToDelete.title} todo deleted successfully", Toast.LENGTH_SHORT).show()
             }
         }
+        // attack item touch helper to recyclerView
+        val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallBack)
+        itemTouchHelper.attachToRecyclerView(recyclerView)
     }
 
     private fun showEmptyDataBaseViews(check: Boolean) {
