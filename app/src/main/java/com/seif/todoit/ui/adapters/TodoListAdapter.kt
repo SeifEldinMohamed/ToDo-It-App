@@ -17,6 +17,16 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
 
     class MyViewHolder(val binding: TodoRowDesignBinding) : RecyclerView.ViewHolder(binding.root) {
 
+        fun bind(position: Int, todoList: List<TodoModel>){
+                binding.todoTitleTxt.text = todoList[position].title
+                binding.todoDescriptionTxt.text = todoList[position].description
+
+                binding.todoItemCons.setOnClickListener {
+                    val action =
+                        ToDoListFragmentDirections.actionToDoListFragmentToUpdateTodoFragment(todoList[position])
+                    itemView.findNavController().navigate(action)
+                }
+            }
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
@@ -27,15 +37,21 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
-        holder.binding.todoTitleTxt.text = todoList[position].title
-        holder.binding.todoDescriptionTxt.text = todoList[position].description
+        holder.bind(position, todoList)
+        setSpinnerPriorityColor(holder,position)
 
-        holder.binding.todoItemCons.setOnClickListener {
-            val action =
-                ToDoListFragmentDirections.actionToDoListFragmentToUpdateTodoFragment(todoList[position])
-            holder.itemView.findNavController().navigate(action)
-        }
+    }
 
+    override fun getItemCount(): Int {
+        return todoList.size
+    }
+
+    fun setData(todoList2: List<TodoModel>) {
+        this.todoList = todoList2
+        notifyDataSetChanged()
+    }
+
+    private fun setSpinnerPriorityColor(holder: MyViewHolder, position: Int){
         when (todoList[position].priority) {
             PriorityModel.HIGH -> holder.binding.priorityIndicator.setCardBackgroundColor(
                 ContextCompat.getColor(
@@ -56,14 +72,5 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
                 )
             )
         }
-    }
-
-    override fun getItemCount(): Int {
-        return todoList.size
-    }
-
-    fun setData(todoList2: List<TodoModel>) {
-        this.todoList = todoList2
-        notifyDataSetChanged()
     }
 }

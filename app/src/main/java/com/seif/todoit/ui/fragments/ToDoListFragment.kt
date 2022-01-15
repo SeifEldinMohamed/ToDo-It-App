@@ -11,7 +11,9 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.google.android.material.snackbar.Snackbar
 import com.seif.todoit.R
+import com.seif.todoit.data.models.TodoModel
 import com.seif.todoit.databinding.FragmentToDoListBinding
 import com.seif.todoit.ui.adapters.TodoListAdapter
 import com.seif.todoit.ui.veiwmodels.ShareViewModel
@@ -60,14 +62,29 @@ class ToDoListFragment : Fragment() {
     private fun swipeToDelete(recyclerView: RecyclerView){
         val swipeToDeleteCallBack:SwipeToDelete = object :  SwipeToDelete(){
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val itemToDelete =  todoListAdapter.todoList[viewHolder.adapterPosition]
-                todoViewModel.deleteTodo(itemToDelete)
-                Toast.makeText(requireContext(), "${itemToDelete.title} todo deleted successfully", Toast.LENGTH_SHORT).show()
+                val deletedItem =  todoListAdapter.todoList[viewHolder.adapterPosition]
+                // delete item
+                todoViewModel.deleteTodo(deletedItem)
+                todoListAdapter.notifyItemRemoved(viewHolder.adapterPosition)
+                // restore (undo)
+                restoreDeletedItem(viewHolder.itemView, deletedItem, viewHolder.adapterPosition)
             }
         }
-        // attack item touch helper to recyclerView
+        // attach item touch helper to recyclerView
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallBack)
         itemTouchHelper.attachToRecyclerView(recyclerView)
+
+    }
+    private fun restoreDeletedItem(view: View, deletedItem:TodoModel, position:Int){
+        val snackBar = Snackbar.make(
+            view,
+            "${deletedItem.title} todo deleted successfully",
+            Snackbar.LENGTH_LONG
+        )
+        snackBar.setAction("Undo"){
+            todoViewModel.insertTodo(deletedItem)
+           todoListAdapter.notifyItemChanged(position)
+        }.show()
     }
 
     private fun showEmptyDataBaseViews(check: Boolean) {
