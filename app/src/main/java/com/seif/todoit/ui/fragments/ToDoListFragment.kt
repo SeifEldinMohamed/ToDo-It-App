@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.seif.todoit.R
 import com.seif.todoit.databinding.FragmentToDoListBinding
 import com.seif.todoit.ui.adapters.TodoListAdapter
@@ -28,6 +29,12 @@ class ToDoListFragment : Fragment() {
     ): View {
         // Inflate the layout for this fragment
         _binding = FragmentToDoListBinding.inflate(inflater,container,false)
+
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
         // set menu
         setHasOptionsMenu(true)
         shareViewModel = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
@@ -46,13 +53,17 @@ class ToDoListFragment : Fragment() {
         binding.btnAddTodo.setOnClickListener {
             findNavController().navigate(R.id.action_toDoListFragment_to_addTodoFragment)
         }
-        return binding.root
+
     }
-
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-
-
+    private fun swipeToDelete(recyclerView: RecyclerView){
+        val swipeToDeleteCallBack = object :  SwipeToDelete(){
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                super.onSwiped(viewHolder, direction)
+                val itemToDelete =  todoListAdapter.todoList[viewHolder.adapterPosition]
+                todoViewModel.deleteTodo(itemToDelete)
+                Toast.makeText(requireContext(), "deleted successfully ${itemToDelete.title}", Toast.LENGTH_SHORT).show()
+            }
+        }
     }
 
     private fun showEmptyDataBaseViews(check: Boolean) {
