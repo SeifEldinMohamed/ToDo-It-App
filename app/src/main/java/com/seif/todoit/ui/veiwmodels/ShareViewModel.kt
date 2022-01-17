@@ -41,9 +41,7 @@ class ShareViewModel(application: Application) : AndroidViewModel(application) {
             }
         }
 
-        override fun onNothingSelected(parent: AdapterView<*>?) {
-
-        }
+        override fun onNothingSelected(parent: AdapterView<*>?) {}
     }
 
     fun getPriority(priority: String): PriorityModel {

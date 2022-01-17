@@ -18,11 +18,12 @@ import com.seif.todoit.databinding.FragmentToDoListBinding
 import com.seif.todoit.ui.adapters.TodoListAdapter
 import com.seif.todoit.ui.veiwmodels.ShareViewModel
 import com.seif.todoit.ui.veiwmodels.TodoViewModel
+import jp.wasabeef.recyclerview.animators.LandingAnimator
+import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator
 
 
 class ToDoListFragment : Fragment() {
-    private var _binding: FragmentToDoListBinding? = null
-    private val binding get() = _binding!!
+    lateinit var binding :FragmentToDoListBinding
     private val todoListAdapter: TodoListAdapter by lazy { TodoListAdapter() }
     lateinit var todoViewModel: TodoViewModel
     lateinit var shareViewModel: ShareViewModel
@@ -31,27 +32,27 @@ class ToDoListFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View {
         // Inflate the layout for this fragment
-        _binding = FragmentToDoListBinding.inflate(inflater,container,false)
-
+        binding = FragmentToDoListBinding.inflate(inflater, container, false)
         return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        // set menu
-        setHasOptionsMenu(true)
+
         shareViewModel = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
         todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
+        // set menu
+        setHasOptionsMenu(true)
+
         todoViewModel.getAllToDos.observe(viewLifecycleOwner, Observer { data ->
             shareViewModel.checkDatabaseEmpty(data)
             todoListAdapter.setData(data)
-
         })
         shareViewModel.emptyDataBase.observe(viewLifecycleOwner, Observer {
             showEmptyDataBaseViews(it)
         })
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
-        binding.recyclerView.adapter = todoListAdapter
+
+        setUpRecyclerView()
         swipeToDelete(binding.recyclerView)
 
         binding.btnAddTodo.setOnClickListener {
@@ -59,13 +60,34 @@ class ToDoListFragment : Fragment() {
         }
 
     }
-    private fun swipeToDelete(recyclerView: RecyclerView){
-        val swipeToDeleteCallBack:SwipeToDelete = object :  SwipeToDelete(){
+
+
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.todo_list_menu, menu)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        if (item.itemId == R.id.menu_delete_all) {
+            confirmDeleteAll()
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
+    private fun setUpRecyclerView() {
+        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.adapter = todoListAdapter
+        binding.recyclerView.itemAnimator = ScaleInTopAnimator().apply {
+            addDuration = 200
+        }
+    }
+
+    private fun swipeToDelete(recyclerView: RecyclerView) {
+        val swipeToDeleteCallBack: SwipeToDelete = object : SwipeToDelete() {
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val deletedItem =  todoListAdapter.todoList[viewHolder.adapterPosition]
+                val deletedItem = todoListAdapter.todoList[viewHolder.adapterPosition]
                 // delete item
                 todoViewModel.deleteTodo(deletedItem)
-                todoListAdapter.notifyItemRemoved(viewHolder.adapterPosition)
                 // restore (undo)
                 restoreDeletedItem(viewHolder.itemView, deletedItem, viewHolder.adapterPosition)
             }
@@ -75,15 +97,15 @@ class ToDoListFragment : Fragment() {
         itemTouchHelper.attachToRecyclerView(recyclerView)
 
     }
-    private fun restoreDeletedItem(view: View, deletedItem:TodoModel, position:Int){
+
+    private fun restoreDeletedItem(view: View, deletedItem: TodoModel, position: Int) {
         val snackBar = Snackbar.make(
             view,
             "${deletedItem.title} todo deleted successfully",
             Snackbar.LENGTH_LONG
         )
-        snackBar.setAction("Undo"){
+        snackBar.setAction("Undo") {
             todoViewModel.insertTodo(deletedItem)
-           todoListAdapter.notifyItemChanged(position)
         }.show()
     }
 
@@ -95,17 +117,6 @@ class ToDoListFragment : Fragment() {
             binding.noTasksImage.visibility = View.GONE
             binding.noTasksTxt.visibility = View.GONE
         }
-    }
-
-    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
-        inflater.inflate(R.menu.todo_list_menu, menu)
-    }
-
-    override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_delete_all) {
-            confirmDeleteAll()
-        }
-        return super.onOptionsItemSelected(item)
     }
 
     private fun confirmDeleteAll() {

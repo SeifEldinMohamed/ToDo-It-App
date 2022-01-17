@@ -23,8 +23,8 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
             binding.todoDescriptionTxt.text = todoList[position].description
 
             binding.todoItemCons.setOnClickListener {
-                val action =
-                    ToDoListFragmentDirections.actionToDoListFragmentToUpdateTodoFragment(todoList[position])
+                val action = ToDoListFragmentDirections
+                    .actionToDoListFragmentToUpdateTodoFragment(todoList[position])
                 itemView.findNavController().navigate(action)
             }
         }
@@ -32,15 +32,18 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
         return MyViewHolder(
-            TodoRowDesignBinding
-                .inflate(LayoutInflater.from(parent.context), parent, false)
+            TodoRowDesignBinding.inflate
+                (
+                LayoutInflater.from(parent.context),
+                parent,
+                false
+            )
         )
     }
 
     override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
         holder.bind(position, todoList)
         setSpinnerPriorityColor(holder, position)
-
     }
 
     override fun getItemCount(): Int {
