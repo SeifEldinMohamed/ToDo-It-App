@@ -1,18 +1,12 @@
 package com.seif.todoit.ui.fragments
 
-import android.app.Application
 import android.os.Bundle
-import android.text.TextUtils
 import android.view.*
-import android.widget.AdapterView
 import android.widget.Toast
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
-import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import com.seif.todoit.R
-import com.seif.todoit.data.models.PriorityModel
 import com.seif.todoit.data.models.TodoModel
 import com.seif.todoit.databinding.FragmentAddTodoBinding
 import com.seif.todoit.ui.veiwmodels.ShareViewModel

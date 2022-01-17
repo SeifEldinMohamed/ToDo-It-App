@@ -12,7 +12,7 @@ import com.seif.todoit.data.models.PriorityModel
 import com.seif.todoit.data.models.TodoModel
 
 class ShareViewModel(application: Application) : AndroidViewModel(application) {
-    var emptyDataBase: MutableLiveData<Boolean> = MutableLiveData(true)
+    var emptyDataBase: MutableLiveData<Boolean> = MutableLiveData(false)
     fun checkDatabaseEmpty(todoData: List<TodoModel>) {
         emptyDataBase.value = todoData.isEmpty()
     }
