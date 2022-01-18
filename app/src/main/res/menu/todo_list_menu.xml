@@ -8,6 +8,11 @@
     app:actionViewClass="androidx.appcompat.widget.SearchView"
     >
 </item>
+    <item android:id="@+id/theme"
+        android:icon="@drawable/ic_dark_mode"
+        app:showAsAction="ifRoom"
+        android:title="@string/theme_menu">
+    </item>
     <group >
     <item android:id="@+id/menu_sort_by"
         android:title="@string/sort_by_menu">

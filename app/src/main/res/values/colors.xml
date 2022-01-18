@@ -11,4 +11,17 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
 
+    <color name="priorityCircleRed">@color/red</color>
+    <color name="priorityCircleYellow">@color/yellow</color>
+    <color name="priorityCircleGreen">@color/green</color>
+
+    <color name="todoBackgroundRed">@color/white</color>
+    <color name="todoBackgroundYellow">@color/white</color>
+    <color name="todoBackgroundGreen">@color/white</color>
+
+    <color name="todoListBackground">@color/white</color>
+
+    <color name="todoTitleTextColor">@color/black</color>
+    <color name="todoDescriptionTextColor">@color/darkGray</color>
+
 </resources>

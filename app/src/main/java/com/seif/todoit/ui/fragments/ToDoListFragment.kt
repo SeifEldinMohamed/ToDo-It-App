@@ -1,9 +1,12 @@
 package com.seif.todoit.ui.fragments
 
 import android.app.AlertDialog
+import android.content.Context
+import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -11,6 +14,7 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
 import com.seif.todoit.R
 import com.seif.todoit.data.models.TodoModel
@@ -18,15 +22,18 @@ import com.seif.todoit.databinding.FragmentToDoListBinding
 import com.seif.todoit.ui.adapters.TodoListAdapter
 import com.seif.todoit.ui.veiwmodels.ShareViewModel
 import com.seif.todoit.ui.veiwmodels.TodoViewModel
-import jp.wasabeef.recyclerview.animators.LandingAnimator
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator
 
 
 class ToDoListFragment : Fragment() {
-    lateinit var binding :FragmentToDoListBinding
+    private lateinit var binding :FragmentToDoListBinding
     private val todoListAdapter: TodoListAdapter by lazy { TodoListAdapter() }
     lateinit var todoViewModel: TodoViewModel
-    lateinit var shareViewModel: ShareViewModel
+    private lateinit var shareViewModel: ShareViewModel
+    private var isNightMode:Boolean = false
+    private lateinit var settingPref:SharedPreferences
+    private lateinit var edit:SharedPreferences.Editor
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,6 +45,16 @@ class ToDoListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        settingPref  = view.context.getSharedPreferences("settingPrefs", Context.MODE_PRIVATE)
+        isNightMode = settingPref.getBoolean("nightMode",false)
+        // check for dark mode theme
+        if(isNightMode){
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+        }
+        else{
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+        }
 
         shareViewModel = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
         todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
@@ -71,11 +88,24 @@ class ToDoListFragment : Fragment() {
         if (item.itemId == R.id.menu_delete_all) {
             confirmDeleteAll()
         }
+        else if(item.itemId == R.id.theme){
+            edit = settingPref.edit()
+            if(isNightMode){ // light mode activated
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                edit.putBoolean("nightMode", false)
+                edit.apply()
+            }
+            else{ // dark mode activated
+                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                edit.putBoolean("nightMode", true)
+                edit.apply()
+            }
+        }
         return super.onOptionsItemSelected(item)
     }
 
     private fun setUpRecyclerView() {
-        binding.recyclerView.layoutManager = LinearLayoutManager(context)
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
         binding.recyclerView.adapter = todoListAdapter
         binding.recyclerView.itemAnimator = ScaleInTopAnimator().apply {
             addDuration = 200
@@ -89,7 +119,7 @@ class ToDoListFragment : Fragment() {
                 // delete item
                 todoViewModel.deleteTodo(deletedItem)
                 // restore (undo)
-                restoreDeletedItem(viewHolder.itemView, deletedItem, viewHolder.adapterPosition)
+                restoreDeletedItem(viewHolder.itemView, deletedItem)
             }
         }
         // attach item touch helper to recyclerView
@@ -98,7 +128,7 @@ class ToDoListFragment : Fragment() {
 
     }
 
-    private fun restoreDeletedItem(view: View, deletedItem: TodoModel, position: Int) {
+    private fun restoreDeletedItem(view: View, deletedItem: TodoModel) {
         val snackBar = Snackbar.make(
             view,
             "${deletedItem.title} todo deleted successfully",

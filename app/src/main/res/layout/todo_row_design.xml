@@ -10,7 +10,7 @@
         android:id="@+id/todo_item_cons"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/todo_backg"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -40,7 +40,7 @@
             android:layout_marginTop="16dp"
             android:maxLength="20"
             android:text="@string/todo_title_row"
-            android:textColor="#000000"
+            android:textColor="@color/todoTitleTextColor"
             android:textSize="22sp"
             android:textStyle="bold"
             app:layout_constraintStart_toStartOf="parent"
@@ -52,16 +52,15 @@
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:layout_marginEnd="16dp"
             android:layout_marginBottom="16dp"
-            android:maxWidth="360dp"
+            android:maxWidth="145dp"
             android:maxLines="10"
             android:text="@string/todo_description_row"
-            android:textColor="@color/darkGray"
+            android:textColor="@color/todoDescriptionTextColor"
+            android:textSize="15sp"
             app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/todo_title_txt" />
     </androidx.constraintlayout.widget.ConstraintLayout>
+
 </androidx.constraintlayout.widget.ConstraintLayout>

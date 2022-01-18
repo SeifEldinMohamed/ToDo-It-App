@@ -1,5 +1,7 @@
 package com.seif.todoit.ui.adapters
 
+import android.content.Context
+import android.content.SharedPreferences
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -15,7 +17,8 @@ import com.seif.todoit.ui.fragments.ToDoListFragmentDirections
 
 class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
     var todoList = emptyList<TodoModel>()
-
+    private var isNightMode:Boolean = false
+    private lateinit var settingPref: SharedPreferences
     class MyViewHolder(val binding: TodoRowDesignBinding) : RecyclerView.ViewHolder(binding.root) {
 
         fun bind(position: Int, todoList: List<TodoModel>) {
@@ -59,25 +62,69 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
 
     private fun setSpinnerPriorityColor(holder: MyViewHolder, position: Int) {
         when (todoList[position].priority) {
-            PriorityModel.HIGH -> holder.binding.priorityIndicator.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.red
+            PriorityModel.HIGH -> {
+                holder.binding.priorityIndicator.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.priorityCircleRed
+                    )
                 )
-            )
-            PriorityModel.MEDIUM -> holder.binding.priorityIndicator.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.yellow
+                // to change background of to-do according to theme
+
+                if(isDarkMode(holder)){
+                    holder.binding.todoItemCons.setBackgroundResource(
+                        R.drawable.todo_backg_red
+                    )
+                }
+                else{
+                    holder.binding.todoItemCons.setBackgroundResource(
+                        R.drawable.todo_backg
+                    )
+                }
+            }
+            PriorityModel.MEDIUM -> {
+                holder.binding.priorityIndicator.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.priorityCircleYellow
+                    )
                 )
-            )
-            PriorityModel.LOW -> holder.binding.priorityIndicator.setCardBackgroundColor(
-                ContextCompat.getColor(
-                    holder.itemView.context,
-                    R.color.green
+                if(isDarkMode(holder)){
+                    holder.binding.todoItemCons.setBackgroundResource(
+                        R.drawable.todo_backg_yellow
+                    )
+                }
+                else{
+                    holder.binding.todoItemCons.setBackgroundResource(
+                        R.drawable.todo_backg
+                    )
+                }
+
+            }
+            PriorityModel.LOW -> {
+                holder.binding.priorityIndicator.setCardBackgroundColor(
+                    ContextCompat.getColor(
+                        holder.itemView.context,
+                        R.color.priorityCircleGreen
+                    )
                 )
-            )
+                if(isDarkMode(holder)){
+                    holder.binding.todoItemCons.setBackgroundResource(
+                        R.drawable.todo_backg_green
+                    )
+                }
+                else{
+                    holder.binding.todoItemCons.setBackgroundResource(
+                        R.drawable.todo_backg
+                    )
+                }
+            }
         }
+    }
+    private fun isDarkMode(holder: MyViewHolder):Boolean{
+        settingPref  = holder.itemView.context.getSharedPreferences("settingPrefs", Context.MODE_PRIVATE)
+        isNightMode = settingPref.getBoolean("nightMode",false)
+        return isNightMode
     }
 }
 /**
