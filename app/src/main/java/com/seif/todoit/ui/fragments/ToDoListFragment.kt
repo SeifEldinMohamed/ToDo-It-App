@@ -7,12 +7,13 @@ import android.os.Bundle
 import android.view.*
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.core.content.ContextCompat
+import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
-import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.google.android.material.snackbar.Snackbar
@@ -33,7 +34,6 @@ class ToDoListFragment : Fragment() {
     private var isNightMode:Boolean = false
     private lateinit var settingPref:SharedPreferences
     private lateinit var edit:SharedPreferences.Editor
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -45,9 +45,9 @@ class ToDoListFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-
+        requireActivity().invalidateOptionsMenu()
         settingPref  = view.context.getSharedPreferences("settingPrefs", Context.MODE_PRIVATE)
-        isNightMode = settingPref.getBoolean("nightMode",false)
+        isNightMode = settingPref.getBoolean("nightMode", false)
         // check for dark mode theme
         if(isNightMode){
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
@@ -84,18 +84,29 @@ class ToDoListFragment : Fragment() {
         inflater.inflate(R.menu.todo_list_menu, menu)
     }
 
+    // called when to change icon of dark mode according to the current mode state
+    override fun onPrepareOptionsMenu(menu: Menu) {
+        if(isNightMode) { // dark mode
+            menu[1].setIcon(R.drawable.ic_light_mode)
+        }
+        else{
+            menu[1].setIcon(R.drawable.ic_dark_mode)
+        }
+            super.onPrepareOptionsMenu(menu)
+    }
+
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.menu_delete_all) {
             confirmDeleteAll()
         }
         else if(item.itemId == R.id.theme){
             edit = settingPref.edit()
-            if(isNightMode){ // light mode activated
+            if(isNightMode){ // if it was dark mode then activate the light mode
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
                 edit.putBoolean("nightMode", false)
                 edit.apply()
             }
-            else{ // dark mode activated
+            else{ // if it was light mode then activate the dark mode
                 AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
                 edit.putBoolean("nightMode", true)
                 edit.apply()
@@ -105,7 +116,10 @@ class ToDoListFragment : Fragment() {
     }
 
     private fun setUpRecyclerView() {
-        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+        binding.recyclerView.layoutManager = StaggeredGridLayoutManager(
+            2,
+            StaggeredGridLayoutManager.VERTICAL
+        )
         binding.recyclerView.adapter = todoListAdapter
         binding.recyclerView.itemAnimator = ScaleInTopAnimator().apply {
             addDuration = 200
