@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <color name="colorPrimaryDark">#000000</color>
+    <color name="colorPrimary">#000000</color>
+
+    <color name="darkGray">#7E7E7E</color>
+    <color name="lightGray">#F7F3F3</color>
+    <color name="green">#24CD00</color>
+    <color name="red">#D50000</color>
+    <color name="yellow">#E6AD00</color>
+    <color name="black">#FF000000</color>
+    <color name="white">#FFFFFFFF</color>
+
+    <color name="priorityCircleRed">@color/white</color>
+    <color name="priorityCircleYellow">@color/white</color>
+    <color name="priorityCircleGreen">@color/white</color>
+
+    <color name="todoListBackground">@color/black</color>
+
+    <color name="todoTitleTextColor">@color/white</color>
+    <color name="todoDescriptionTextColor">@color/lightGray</color>
+
+
+
+
+
+
+</resources>

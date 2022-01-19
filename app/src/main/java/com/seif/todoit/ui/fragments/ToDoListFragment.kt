@@ -5,9 +5,9 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
+import androidx.appcompat.widget.SearchView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.core.content.ContextCompat
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -26,7 +26,7 @@ import com.seif.todoit.ui.veiwmodels.TodoViewModel
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator
 
 
-class ToDoListFragment : Fragment() {
+class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var binding :FragmentToDoListBinding
     private val todoListAdapter: TodoListAdapter by lazy { TodoListAdapter() }
     lateinit var todoViewModel: TodoViewModel
@@ -82,6 +82,10 @@ class ToDoListFragment : Fragment() {
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.todo_list_menu, menu)
+        val searchItem = menu.findItem(R.id.menu_search)
+        val searchView = searchItem.actionView as? SearchView
+        searchView?.isSubmitButtonEnabled = true // Enables showing a submit button when the query is non-empty
+        searchView?.setOnQueryTextListener(this)
     }
 
     // called when to change icon of dark mode according to the current mode state
@@ -113,6 +117,26 @@ class ToDoListFragment : Fragment() {
             }
         }
         return super.onOptionsItemSelected(item)
+    }
+
+    override fun onQueryTextSubmit(query: String?): Boolean { // triggered when we typing text and press enter in search view
+        if(query!=null){
+            searchQueryInDatabase(query)
+        }
+        return true
+    }
+
+    override fun onQueryTextChange(newText: String?): Boolean { // triggered when we try typing something in search view
+        if(newText!=null){
+            searchQueryInDatabase(newText)
+        }
+        return true
+    }
+    private fun searchQueryInDatabase(query: String) {
+        val searchQuery = "%$query%"
+        todoViewModel.searchTodo(searchQuery).observe(viewLifecycleOwner,Observer { resultList ->
+                todoListAdapter.setData(resultList)
+        })
     }
 
     private fun setUpRecyclerView() {
@@ -177,6 +201,8 @@ class ToDoListFragment : Fragment() {
             create().show()
         }
     }
+
+
 
 }
 /** setHasOptionMenu()
