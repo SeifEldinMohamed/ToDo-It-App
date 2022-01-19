@@ -24,4 +24,8 @@ class RepositoryImplementation(private val todoDao: TodoDao) : Repository {
     override suspend fun deleteAllToDos() {
         todoDao.deleteAllToDos()
     }
+
+    override  fun searchTodo(searchQuery: String):LiveData<List<TodoModel>> {
+       return todoDao.searchTodo(searchQuery)
+    }
 }
