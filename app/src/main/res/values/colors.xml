@@ -15,9 +15,6 @@
     <color name="priorityCircleYellow">@color/yellow</color>
     <color name="priorityCircleGreen">@color/green</color>
 
-    <color name="todoBackgroundRed">@color/white</color>
-    <color name="todoBackgroundYellow">@color/white</color>
-    <color name="todoBackgroundGreen">@color/white</color>
 
     <color name="todoListBackground">@color/white</color>
 
