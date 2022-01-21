@@ -112,8 +112,10 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
                     edit.apply()
                 }
             }
-            R.id.menu_priority_high -> todoViewModel.sortByPriorityHigh().observe(this, Observer { todoListAdapter.setData(it) })
-            R.id.menu_priority_low -> todoViewModel.sortByPriorityLow().observe(this, Observer { todoListAdapter.setData(it) })
+            R.id.menu_priority_high -> todoViewModel.sortByPriorityHigh()
+                .observe(this, Observer { todoListAdapter.setData(it) })
+            R.id.menu_priority_low -> todoViewModel.sortByPriorityLow()
+                .observe(this, Observer { todoListAdapter.setData(it) })
         }
         return super.onOptionsItemSelected(item)
     }
