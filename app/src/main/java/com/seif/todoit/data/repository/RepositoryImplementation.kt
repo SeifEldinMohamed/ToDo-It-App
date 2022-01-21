@@ -28,4 +28,8 @@ class RepositoryImplementation(private val todoDao: TodoDao) : Repository {
     override  fun searchTodo(searchQuery: String):LiveData<List<TodoModel>> {
        return todoDao.searchTodo(searchQuery)
     }
+
+    override fun sortByPriorityHigh(): LiveData<List<TodoModel>> {
+        return todoDao.sortByPriorityHigh()
+    }
 }

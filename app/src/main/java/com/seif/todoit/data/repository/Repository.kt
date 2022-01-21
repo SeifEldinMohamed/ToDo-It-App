@@ -10,4 +10,5 @@ interface Repository {
     suspend fun deleteTodo(todo: TodoModel)
     suspend fun deleteAllToDos()
     fun searchTodo(searchQuery: String):LiveData<List<TodoModel>>
+    fun sortByPriorityHigh():LiveData<List<TodoModel>>
 }

@@ -7,10 +7,10 @@ import com.seif.todoit.data.models.TodoModel
 @Dao
 interface TodoDao {
     @Query("SELECT * FROM todo_table ORDER BY id ASC")
-    fun getAllToDos():LiveData<List<TodoModel>>
+    fun getAllToDos(): LiveData<List<TodoModel>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
-    suspend fun addTodo(todo:TodoModel)
+    suspend fun addTodo(todo: TodoModel)
 
     @Update
     suspend fun updateTodo(todo: TodoModel)
@@ -22,5 +22,11 @@ interface TodoDao {
     suspend fun deleteAllToDos()
 
     @Query("SELECT * FROM todo_table WHERE title LIKE :searchQuery")
-    fun searchTodo(searchQuery:String):LiveData<List<TodoModel>>
+    fun searchTodo(searchQuery: String): LiveData<List<TodoModel>>
+
+    // this 1 means that I want to return rows satisfy this condition first
+    @Query("SELECT * FROM TODO_TABLE ORDER BY CASE WHEN priority LIKE 'H%' THEN 1 WHEN priority LIKE 'M%' THEN 2 WHEN priority LIKE 'L%' THEN 3 END")
+    fun sortByPriorityHigh(): LiveData<List<TodoModel>>
+
+
 }

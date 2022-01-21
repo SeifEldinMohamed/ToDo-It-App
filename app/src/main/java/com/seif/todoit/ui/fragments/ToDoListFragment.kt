@@ -27,13 +27,13 @@ import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator
 
 
 class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
-    private lateinit var binding :FragmentToDoListBinding
+    private lateinit var binding: FragmentToDoListBinding
     private val todoListAdapter: TodoListAdapter by lazy { TodoListAdapter() }
     lateinit var todoViewModel: TodoViewModel
     private lateinit var shareViewModel: ShareViewModel
-    private var isNightMode:Boolean = false
-    private lateinit var settingPref:SharedPreferences
-    private lateinit var edit:SharedPreferences.Editor
+    private var isNightMode: Boolean = false
+    private lateinit var settingPref: SharedPreferences
+    private lateinit var edit: SharedPreferences.Editor
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -46,13 +46,12 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         requireActivity().invalidateOptionsMenu()
-        settingPref  = view.context.getSharedPreferences("settingPrefs", Context.MODE_PRIVATE)
+        settingPref = view.context.getSharedPreferences("settingPrefs", Context.MODE_PRIVATE)
         isNightMode = settingPref.getBoolean("nightMode", false)
         // check for dark mode theme
-        if(isNightMode){
+        if (isNightMode) {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-        }
-        else{
+        } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
@@ -79,63 +78,64 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
     }
 
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.todo_list_menu, menu)
         val searchItem = menu.findItem(R.id.menu_search)
         val searchView = searchItem.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true // Enables showing a submit button when the query is non-empty
+        searchView?.isSubmitButtonEnabled =
+            true // Enables showing a submit button when the query is non-empty
         searchView?.setOnQueryTextListener(this)
     }
 
     // called when to change icon of dark mode according to the current mode state
     override fun onPrepareOptionsMenu(menu: Menu) {
-        if(isNightMode) { // dark mode
+        if (isNightMode) { // dark mode
             menu[1].setIcon(R.drawable.ic_light_mode)
-        }
-        else{
+        } else {
             menu[1].setIcon(R.drawable.ic_dark_mode)
         }
-            super.onPrepareOptionsMenu(menu)
+        super.onPrepareOptionsMenu(menu)
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_delete_all) {
-            confirmDeleteAll()
-        }
-        else if(item.itemId == R.id.theme){
-            edit = settingPref.edit()
-            if(isNightMode){ // if it was dark mode then activate the light mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                edit.putBoolean("nightMode", false)
-                edit.apply()
+        when (item.itemId) {
+            R.id.menu_delete_all -> confirmDeleteAll()
+            R.id.theme -> {
+                edit = settingPref.edit()
+                if (isNightMode) { // if it was dark mode then activate the light mode
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+                    edit.putBoolean("nightMode", false)
+                    edit.apply()
+                } else { // if it was light mode then activate the dark mode
+                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+                    edit.putBoolean("nightMode", true)
+                    edit.apply()
+                }
             }
-            else{ // if it was light mode then activate the dark mode
-                AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                edit.putBoolean("nightMode", true)
-                edit.apply()
-            }
+            R.id.menu_priority_high -> todoViewModel.sortByPriorityHigh().observe(this, Observer { todoListAdapter.setData(it) })
+
         }
         return super.onOptionsItemSelected(item)
     }
 
     override fun onQueryTextSubmit(query: String?): Boolean { // triggered when we typing text and press enter in search view
-        if(query!=null){
+        if (query != null) {
             searchQueryInDatabase(query)
         }
         return true
     }
 
     override fun onQueryTextChange(newText: String?): Boolean { // triggered when we try typing something in search view
-        if(newText!=null){
+        if (newText != null) {
             searchQueryInDatabase(newText)
         }
         return true
     }
+
     private fun searchQueryInDatabase(query: String) {
         val searchQuery = "%$query%"
-        todoViewModel.searchTodo(searchQuery).observe(viewLifecycleOwner,Observer { resultList ->
-                todoListAdapter.setData(resultList)
+        todoViewModel.searchTodo(searchQuery).observe(viewLifecycleOwner, Observer { resultList ->
+            todoListAdapter.setData(resultList)
         })
     }
 
@@ -201,7 +201,6 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
             create().show()
         }
     }
-
 
 
 }

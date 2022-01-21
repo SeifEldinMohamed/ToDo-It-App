@@ -41,4 +41,7 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     fun searchTodo(searchQuery: String):LiveData<List<TodoModel>>{
        return repository.searchTodo(searchQuery)
     }
+    fun sortByPriorityHigh():LiveData<List<TodoModel>>{
+        return repository.sortByPriorityHigh()
+    }
 }
