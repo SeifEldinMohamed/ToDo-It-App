@@ -38,10 +38,16 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
             repository.deleteAllToDos()
         }
     }
+
     fun searchTodo(searchQuery: String):LiveData<List<TodoModel>>{
        return repository.searchTodo(searchQuery)
     }
+
     fun sortByPriorityHigh():LiveData<List<TodoModel>>{
         return repository.sortByPriorityHigh()
+    }
+
+    fun sortByPriorityLow():LiveData<List<TodoModel>>{
+        return repository.sortByPriorityLow()
     }
 }

@@ -32,4 +32,8 @@ class RepositoryImplementation(private val todoDao: TodoDao) : Repository {
     override fun sortByPriorityHigh(): LiveData<List<TodoModel>> {
         return todoDao.sortByPriorityHigh()
     }
+
+    override fun sortByPriorityLow(): LiveData<List<TodoModel>> {
+        return todoDao.sortByPriorityLow()
+    }
 }
