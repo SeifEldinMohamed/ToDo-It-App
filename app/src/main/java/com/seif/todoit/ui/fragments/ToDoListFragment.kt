@@ -23,6 +23,7 @@ import com.seif.todoit.databinding.FragmentToDoListBinding
 import com.seif.todoit.ui.adapters.TodoListAdapter
 import com.seif.todoit.ui.veiwmodels.ShareViewModel
 import com.seif.todoit.ui.veiwmodels.TodoViewModel
+import com.seif.todoit.utils.hideKeyboard
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator
 
 
@@ -59,6 +60,7 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
         todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
         // set menu
         setHasOptionsMenu(true)
+        hideKeyboard(requireActivity())
 
         todoViewModel.getAllToDos.observe(viewLifecycleOwner, Observer { data ->
             shareViewModel.checkDatabaseEmpty(data)
