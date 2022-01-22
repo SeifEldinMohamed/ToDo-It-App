@@ -11,8 +11,8 @@ import com.seif.todoit.R
 import com.seif.todoit.data.models.TodoModel
 import com.seif.todoit.databinding.FragmentUpdateTodoBinding
 import com.seif.todoit.ui.fragments.UpdateTodoFragmentArgs.Companion.fromBundle
-import com.seif.todoit.ui.veiwmodels.ShareViewModel
-import com.seif.todoit.ui.veiwmodels.TodoViewModel
+import com.seif.todoit.veiwModel.ShareViewModel
+import com.seif.todoit.veiwModel.TodoViewModel
 
 
 class UpdateTodoFragment : Fragment() {

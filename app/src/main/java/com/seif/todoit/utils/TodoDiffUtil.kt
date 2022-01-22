@@ -1,4 +1,4 @@
-package com.seif.todoit.ui.adapters
+package com.seif.todoit.utils
 
 import androidx.recyclerview.widget.DiffUtil
 import com.seif.todoit.data.models.TodoModel

@@ -9,8 +9,8 @@ import androidx.navigation.fragment.findNavController
 import com.seif.todoit.R
 import com.seif.todoit.data.models.TodoModel
 import com.seif.todoit.databinding.FragmentAddTodoBinding
-import com.seif.todoit.ui.veiwmodels.ShareViewModel
-import com.seif.todoit.ui.veiwmodels.TodoViewModel
+import com.seif.todoit.veiwModel.ShareViewModel
+import com.seif.todoit.veiwModel.TodoViewModel
 
 
 class AddTodoFragment : Fragment() {

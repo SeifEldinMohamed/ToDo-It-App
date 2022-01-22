@@ -1,4 +1,4 @@
-package com.seif.todoit.ui.veiwmodels
+package com.seif.todoit.veiwModel
 
 import android.app.Application
 import androidx.lifecycle.AndroidViewModel

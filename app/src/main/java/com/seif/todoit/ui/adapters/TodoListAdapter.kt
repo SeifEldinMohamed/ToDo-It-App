@@ -3,7 +3,6 @@ package com.seif.todoit.ui.adapters
 import android.content.Context
 import android.content.SharedPreferences
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import androidx.core.content.ContextCompat
 import androidx.navigation.findNavController
@@ -14,6 +13,7 @@ import com.seif.todoit.data.models.PriorityModel
 import com.seif.todoit.data.models.TodoModel
 import com.seif.todoit.databinding.TodoRowDesignBinding
 import com.seif.todoit.ui.fragments.ToDoListFragmentDirections
+import com.seif.todoit.utils.TodoDiffUtil
 
 class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
     var todoList = emptyList<TodoModel>()
@@ -61,7 +61,7 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
 
     }
     // used instead of setData to prevent recycler view from scrolling to the bottom after sorting
-    fun setDataForSorting(newTodoList: List<TodoModel>) {
+    fun setSortedData(newTodoList: List<TodoModel>) {
         todoList = newTodoList
         notifyDataSetChanged() // rebind and relayout all views
     }

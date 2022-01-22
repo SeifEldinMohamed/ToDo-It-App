@@ -1,4 +1,4 @@
-package com.seif.todoit.ui.fragments
+package com.seif.todoit.ui.adapters
 
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView

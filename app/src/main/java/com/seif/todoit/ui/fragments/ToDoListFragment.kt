@@ -20,9 +20,10 @@ import com.google.android.material.snackbar.Snackbar
 import com.seif.todoit.R
 import com.seif.todoit.data.models.TodoModel
 import com.seif.todoit.databinding.FragmentToDoListBinding
+import com.seif.todoit.ui.adapters.SwipeToDelete
 import com.seif.todoit.ui.adapters.TodoListAdapter
-import com.seif.todoit.ui.veiwmodels.ShareViewModel
-import com.seif.todoit.ui.veiwmodels.TodoViewModel
+import com.seif.todoit.veiwModel.ShareViewModel
+import com.seif.todoit.veiwModel.TodoViewModel
 import com.seif.todoit.utils.hideKeyboard
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator
 
@@ -115,9 +116,9 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
                 }
             }
             R.id.menu_priority_high -> todoViewModel.sortByPriorityHigh()
-                .observe(this, Observer { todoListAdapter.setDataForSorting(it) })
+                .observe(this, Observer { todoListAdapter.setSortedData(it) })
             R.id.menu_priority_low -> todoViewModel.sortByPriorityLow()
-                .observe(this, Observer { todoListAdapter.setDataForSorting(it) })
+                .observe(this, Observer { todoListAdapter.setSortedData(it) })
         }
         return super.onOptionsItemSelected(item)
     }
