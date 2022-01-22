@@ -58,6 +58,12 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
         val diffUtilResult = DiffUtil.calculateDiff(diffUtilCallback)
         this.todoList = newTodoList
         diffUtilResult.dispatchUpdatesTo(this)
+
+    }
+    // used instead of setData to prevent recycler view from scrolling to the bottom after sorting
+    fun setDataForSorting(newTodoList: List<TodoModel>) {
+        todoList = newTodoList
+        notifyDataSetChanged() // rebind and relayout all views
     }
 
     private fun setSpinnerPriorityColor(holder: MyViewHolder, position: Int) {

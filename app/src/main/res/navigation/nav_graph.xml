@@ -34,7 +34,9 @@
             android:id="@+id/action_addTodoFragment_to_toDoListFragment"
             app:destination="@id/toDoListFragment"
             app:enterAnim="@anim/from_left"
-            app:exitAnim="@anim/to_right" />
+            app:exitAnim="@anim/to_right"
+            app:popUpTo="@id/toDoListFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/updateTodoFragment"
@@ -45,7 +47,9 @@
             android:id="@+id/action_updateTodoFragment_to_toDoListFragment"
             app:destination="@id/toDoListFragment"
             app:enterAnim="@anim/from_right"
-            app:exitAnim="@anim/from_left" />
+            app:exitAnim="@anim/from_left"
+            app:popUpTo="@id/toDoListFragment"
+            app:popUpToInclusive="true" />
         <argument
             android:name="currentTodo"
             app:argType="com.seif.todoit.data.models.TodoModel" />
