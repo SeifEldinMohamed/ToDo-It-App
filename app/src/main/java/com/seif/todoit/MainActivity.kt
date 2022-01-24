@@ -14,7 +14,6 @@ class MainActivity : AppCompatActivity() {
         setupActionBarWithNavController(findNavController(R.id.nav_host_fragment))
     }
 
-
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
         return navController.navigateUp() || super.onSupportNavigateUp()
@@ -28,7 +27,6 @@ class MainActivity : AppCompatActivity() {
     override the method in order to connect the two
  **/
 }
-
 
 
 //you don't need to override the onSupportNavigationUp method as Navigation will automatically handle the click events.
