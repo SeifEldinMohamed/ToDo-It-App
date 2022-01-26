@@ -56,9 +56,11 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-
         shareViewModel = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
         todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
+
+
+
         // set menu
         setHasOptionsMenu(true)
         hideKeyboard(requireActivity())

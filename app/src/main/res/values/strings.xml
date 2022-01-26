@@ -25,6 +25,8 @@
     <string name="review_menu">Review</string>
     <string name="our_apps_menu">Our Apps</string>
     <string name="about_menu">About</string>
+    <string name="drawer_open">Open</string>
+    <string name="drawer_close">Close</string>
     <string-array name="spinner_items">
         <item>High Priority</item>
         <item>Medium Priority</item>
