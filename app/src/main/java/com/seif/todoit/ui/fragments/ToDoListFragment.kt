@@ -5,9 +5,11 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
-import androidx.appcompat.widget.SearchView
 import android.widget.Toast
+import androidx.appcompat.app.ActionBarDrawerToggle
+import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -16,19 +18,20 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.seif.todoit.R
 import com.seif.todoit.data.models.TodoModel
 import com.seif.todoit.databinding.FragmentToDoListBinding
 import com.seif.todoit.ui.adapters.SwipeToDelete
 import com.seif.todoit.ui.adapters.TodoListAdapter
+import com.seif.todoit.utils.hideKeyboard
 import com.seif.todoit.veiwModel.ShareViewModel
 import com.seif.todoit.veiwModel.TodoViewModel
-import com.seif.todoit.utils.hideKeyboard
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator
 
 
-class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
+class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
     private lateinit var binding: FragmentToDoListBinding
     private val todoListAdapter: TodoListAdapter by lazy { TodoListAdapter() }
     lateinit var todoViewModel: TodoViewModel
@@ -59,7 +62,8 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
         shareViewModel = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
         todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
 
-
+        //binding.navDraw.setupWithNavController(findNavController())
+        //appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
 
         // set menu
         setHasOptionsMenu(true)
@@ -208,6 +212,8 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
             create().show()
         }
     }
+
+
 
 
 }

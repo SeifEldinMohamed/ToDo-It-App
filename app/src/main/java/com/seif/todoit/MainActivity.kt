@@ -16,36 +16,36 @@ import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.seif.todoit.databinding.ActivityMainBinding
 
-class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener {
+class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
     lateinit var binding: ActivityMainBinding
-    lateinit var appBarConfiguration: AppBarConfiguration
-    lateinit var navController: NavController
+    private var appBarConfiguration: AppBarConfiguration? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        navController = findNavController(R.id.nav_host_fragment)
-        binding.navDraw.setupWithNavController(navController)
-        appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
-        setupActionBarWithNavController(navController, appBarConfiguration)
-        // set up navigation drawer
-
+        appBarConfiguration = AppBarConfiguration(
+            findNavController(R.id.nav_host_fragment).graph,
+            binding.drawerLayout,
+        )
+        setupActionBarWithNavController(findNavController(R.id.nav_host_fragment), appBarConfiguration!!) //the most important part
+        binding.navDraw.setNavigationItemSelectedListener(this)
 
     }
 
     override fun onSupportNavigateUp(): Boolean {
         val navController = findNavController(R.id.nav_host_fragment)
-        return navController.navigateUp(appBarConfiguration) ||
+        return navController.navigateUp(appBarConfiguration!!) ||
                 super.onSupportNavigateUp()
     }
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.menu_share -> Toast.makeText(this, "test", Toast.LENGTH_SHORT).show()
+            R.id.menu_share -> Toast.makeText(this, "share", Toast.LENGTH_SHORT).show()
         }
         return true
     }
+
 
     /**
     onSupportNavigateUp comes from AppCompatActivity. You should override
@@ -57,10 +57,3 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
      **/
 }
 
-
-//you don't need to override the onSupportNavigationUp method as Navigation will automatically handle the click events.
-//You also don't need to override it if you want to handle the toolbar yourself.
-// code:
-// val navController = findNavController(R.id.nav_host_fragment)
-//  val appBarConfiguration = AppBarConfiguration(navController.graph)
-//  binding.toolbar.setupWithNavController(navController, appBarConfiguration)
