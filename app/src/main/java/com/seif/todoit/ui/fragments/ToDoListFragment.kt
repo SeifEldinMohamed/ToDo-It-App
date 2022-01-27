@@ -6,8 +6,6 @@ import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
@@ -18,7 +16,6 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.google.android.material.navigation.NavigationView
 import com.google.android.material.snackbar.Snackbar
 import com.seif.todoit.R
 import com.seif.todoit.data.models.TodoModel
@@ -50,7 +47,13 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//  Declare that the options menu has changed, so should be recreated.
+//  The #onCreateOptionsMenu(Menu) method will be called the next time it needs to be displayed.
         requireActivity().invalidateOptionsMenu()
+
+        shareViewModel = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
+        todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
+        // theme
         settingPref = view.context.getSharedPreferences("settingPrefs", Context.MODE_PRIVATE)
         isNightMode = settingPref.getBoolean("nightMode", false)
         // check for dark mode theme
@@ -59,11 +62,6 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
-        shareViewModel = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
-        todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
-
-        //binding.navDraw.setupWithNavController(findNavController())
-        //appBarConfiguration = AppBarConfiguration(navController.graph, binding.drawerLayout)
 
         // set menu
         setHasOptionsMenu(true)
@@ -83,24 +81,22 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
         binding.btnAddTodo.setOnClickListener {
             findNavController().navigate(R.id.action_toDoListFragment_to_addTodoFragment)
         }
-
     }
-
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         inflater.inflate(R.menu.todo_list_menu, menu)
+        // search
         val searchItem = menu.findItem(R.id.menu_search)
         val searchView = searchItem.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled =
-            true // Enables showing a submit button when the query is non-empty
+        searchView?.isSubmitButtonEnabled = true // Enables showing a submit button when the query is non-empty
         searchView?.setOnQueryTextListener(this)
     }
 
     // called when to change icon of dark mode according to the current mode state
     override fun onPrepareOptionsMenu(menu: Menu) {
-        if (isNightMode) { // dark mode
+        if (isNightMode) { // show light mode icon if it's dark mode
             menu[1].setIcon(R.drawable.ic_light_mode)
-        } else {
+        } else { // show dark mode icon if it's dark mode
             menu[1].setIcon(R.drawable.ic_dark_mode)
         }
         super.onPrepareOptionsMenu(menu)
@@ -109,18 +105,7 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         when (item.itemId) {
             R.id.menu_delete_all -> confirmDeleteAll()
-            R.id.theme -> {
-                edit = settingPref.edit()
-                if (isNightMode) { // if it was dark mode then activate the light mode
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
-                    edit.putBoolean("nightMode", false)
-                    edit.apply()
-                } else { // if it was light mode then activate the dark mode
-                    AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
-                    edit.putBoolean("nightMode", true)
-                    edit.apply()
-                }
-            }
+            R.id.theme -> applyNewTheme()
             R.id.menu_priority_high -> todoViewModel.sortByPriorityHigh()
                 .observe(this, Observer { todoListAdapter.setSortedData(it) })
             R.id.menu_priority_low -> todoViewModel.sortByPriorityLow()
@@ -150,6 +135,18 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
         })
     }
 
+    private fun applyNewTheme() {
+        edit = settingPref.edit()
+        if (isNightMode) { // if it was dark mode then activate the light mode
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
+            edit.putBoolean("nightMode", false)
+        } else { // if it was light mode then activate the dark mode
+            AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_YES)
+            edit.putBoolean("nightMode", true)
+        }
+        edit.apply()
+    }
+
     private fun setUpRecyclerView() {
         binding.recyclerView.layoutManager = StaggeredGridLayoutManager(
             2,
@@ -174,7 +171,6 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
         // attach item touch helper to recyclerView
         val itemTouchHelper = ItemTouchHelper(swipeToDeleteCallBack)
         itemTouchHelper.attachToRecyclerView(recyclerView)
-
     }
 
     private fun restoreDeletedItem(view: View, deletedItem: TodoModel) {
@@ -202,8 +198,7 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Ok") { _, _ ->
             todoViewModel.deleteAllToDos()
-            Toast.makeText(requireContext(), "Delete all items successfully", Toast.LENGTH_SHORT)
-                .show()
+            Toast.makeText(requireContext(), "Delete all items successfully", Toast.LENGTH_SHORT).show()
         }
         with(builder) {
             setNegativeButton("Cancel") { _, _ -> }
@@ -212,10 +207,6 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
             create().show()
         }
     }
-
-
-
-
 }
 /** setHasOptionMenu()
  * Report that this fragment would like to participate in populating the options menu

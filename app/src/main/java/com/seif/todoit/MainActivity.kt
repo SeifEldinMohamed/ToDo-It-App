@@ -1,23 +1,20 @@
 package com.seif.todoit
 
+import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.view.Menu
 import android.view.MenuItem
 import android.widget.Toast
-import android.widget.ToggleButton
-import androidx.appcompat.app.ActionBarDrawerToggle
-import androidx.navigation.NavController
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
 import com.google.android.material.navigation.NavigationView
 import com.seif.todoit.databinding.ActivityMainBinding
 
 class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelectedListener{
-    lateinit var binding: ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
     private var appBarConfiguration: AppBarConfiguration? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -41,9 +38,33 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
 
     override fun onNavigationItemSelected(item: MenuItem): Boolean {
         when(item.itemId){
-            R.id.menu_share -> Toast.makeText(this, "share", Toast.LENGTH_SHORT).show()
+            R.id.menu_share -> shareApp()
+            R.id.menu_rate -> rateApp()
         }
+        binding.drawerLayout.close()
         return true
+    }
+
+    private fun rateApp() {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(
+                    "market://details?id=com.seif.todoit"
+                )
+            )
+        )
+    }
+
+    private fun shareApp() {
+        val sendIntent = Intent(Intent.ACTION_SEND)
+        sendIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            "Download Todo It app from here:\n" +
+                    "https://play.google.com/store/apps/details?id=com.seif.todoit"
+        )
+        sendIntent.type = "text/plain"
+        startActivity(Intent.createChooser(sendIntent, "Choose the app you want to share with:"))
     }
 
 
