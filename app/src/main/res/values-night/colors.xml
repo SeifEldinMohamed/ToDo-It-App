@@ -19,6 +19,10 @@
 
     <color name="todoTitleTextColor">@color/white</color>
     <color name="todoDescriptionTextColor">@color/lightGray</color>
+    <drawable name="nav_header_image">@drawable/todo_niight</drawable>
+    <color name="nav_header_background">@color/black</color>
+
+
 
 
 

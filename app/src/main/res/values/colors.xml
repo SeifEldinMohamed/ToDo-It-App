@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimaryDark">#060193</color>
-    <color name="colorPrimary">#0813A6</color>
+    <color name="colorPrimaryDark">#06018E</color>
+    <color name="colorPrimary">#060193</color>
 
     <color name="darkGray">#7E7E7E</color>
     <color name="lightGray">#E6E6E6</color>
@@ -20,5 +20,7 @@
 
     <color name="todoTitleTextColor">@color/black</color>
     <color name="todoDescriptionTextColor">@color/darkGray</color>
+    <drawable name="nav_header_image">@drawable/app_icon</drawable>
+    <color name="nav_header_background">@color/colorPrimaryDark</color>
 
 </resources>
