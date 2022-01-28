@@ -1,11 +1,13 @@
 package com.seif.todoit
 
+import android.app.Dialog
 import android.content.Intent
 import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.MenuItem
-import android.widget.Toast
+import android.view.Window
+import android.widget.Button
 import androidx.navigation.findNavController
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.navigateUp
@@ -40,9 +42,23 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         when(item.itemId){
             R.id.menu_share -> shareApp()
             R.id.menu_rate -> rateApp()
+            R.id.menu_review -> reviewApp()
+            R.id.menu_our_apps -> ourApps()
+            R.id.menu_about -> aboutDeveloper()
         }
         binding.drawerLayout.close()
         return true
+    }
+
+    private fun shareApp() {
+        val sendIntent = Intent(Intent.ACTION_SEND)
+        sendIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            "Download Todo It app from here:\n" +
+                    "https://play.google.com/store/apps/details?id=com.seif.todoit"
+        )
+        sendIntent.type = "text/plain"
+        startActivity(Intent.createChooser(sendIntent, "Choose the app you want to share with:"))
     }
 
     private fun rateApp() {
@@ -56,16 +72,47 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
         )
     }
 
-    private fun shareApp() {
-        val sendIntent = Intent(Intent.ACTION_SEND)
-        sendIntent.putExtra(
-            Intent.EXTRA_TEXT,
-            "Download Todo It app from here:\n" +
-                    "https://play.google.com/store/apps/details?id=com.seif.todoit"
+    private fun reviewApp() {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(
+                    "mailto:" + "seifeldinmohamed101@gmail.com"
+                            + "?subject=" + "Message from Todo It"
+                )
+            )
         )
-        sendIntent.type = "text/plain"
-        startActivity(Intent.createChooser(sendIntent, "Choose the app you want to share with:"))
     }
+
+    private fun ourApps() {
+        startActivity(
+            Intent(
+                Intent.ACTION_VIEW,
+                Uri.parse(
+                    "https://play.google.com/store/apps/dev?id=8697500693164992079"
+                )
+            )
+        )
+    }
+
+    private fun aboutDeveloper() {
+        val dialog = Dialog(this)
+        dialog.requestWindowFeature(Window.FEATURE_NO_TITLE)
+        dialog.setContentView(R.layout.about_dialog)
+        val btnOk = dialog.findViewById<Button>(R.id.btn_ok_about)
+        btnOk.setOnClickListener {
+            dialog.dismiss()
+        }
+        dialog.show()
+    }
+
+
+
+
+
+
+
+
 
 
     /**

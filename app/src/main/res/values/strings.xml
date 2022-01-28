@@ -27,6 +27,11 @@
     <string name="about_menu">About</string>
     <string name="drawer_open">Open</string>
     <string name="drawer_close">Close</string>
+    <string name="about_dialog">About</string>
+    <string name="todo_it_dialog">Todo It</string>
+    <string name="version_1_0_0_dialog">Version: 1.0.0</string>
+    <string name="developed_by_seif_mohamed_dialog">Developed by: Seif Mohamed</string>
+    <string name="ok_about_dialog">OK</string>
     <string-array name="spinner_items">
         <item>High Priority</item>
         <item>Medium Priority</item>
