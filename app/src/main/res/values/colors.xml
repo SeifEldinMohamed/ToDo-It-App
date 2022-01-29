@@ -23,4 +23,7 @@
     <drawable name="nav_header_image">@drawable/app_icon</drawable>
     <color name="nav_header_background">@color/colorPrimaryDark</color>
 
+    <color name="nav_item_text_color">#000000</color>
+    <color name="nav_background_color">#FFFCFC</color>
+
 </resources>
