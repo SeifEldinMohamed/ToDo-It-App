@@ -9,7 +9,7 @@
     <color name="red">#D50000</color>
     <color name="yellow">#FFBC00</color>
     <color name="black">#FF000000</color>
-    <color name="white">#FFFFFFFF</color>
+    <color name="white">#FBFBFB</color>
 
     <color name="priorityCircleRed">@color/red</color>
     <color name="priorityCircleYellow">@color/yellow</color>
@@ -25,5 +25,7 @@
 
     <color name="nav_item_text_color">#000000</color>
     <color name="nav_background_color">#FFFCFC</color>
+    <color name="noTasks_image_color">#FF000000</color>
+    <color name="noTasks_text_Color">@color/black</color>
 
 </resources>
