@@ -7,6 +7,11 @@
         android:icon="@drawable/ic_save"
         app:showAsAction="ifRoom" />
     <item
+        android:id="@+id/menu_share_todo"
+        android:title="@string/share_menu_todo"
+        android:icon="@drawable/icon_share"
+        app:showAsAction="ifRoom"/>
+    <item
         android:id="@+id/menu_delete"
         android:title="@string/delete_todo_update" />
 

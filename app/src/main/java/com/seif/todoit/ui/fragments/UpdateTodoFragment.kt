@@ -1,6 +1,7 @@
 package com.seif.todoit.ui.fragments
 
 import android.app.AlertDialog
+import android.content.Intent
 import android.os.Bundle
 import android.view.*
 import android.widget.Toast
@@ -51,12 +52,32 @@ class UpdateTodoFragment : Fragment() {
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
-        if (item.itemId == R.id.menu_save) {
-            updateTodoItem()
-        } else if (item.itemId == R.id.menu_delete) {
-            deleteTodoItem()
+        when (item.itemId) {
+            R.id.menu_save -> updateTodoItem()
+            R.id.menu_share_todo -> shareTodo()
+            R.id.menu_delete -> deleteTodoItem()
         }
+
+
         return super.onOptionsItemSelected(item)
+    }
+
+    private fun shareTodo() {
+        val shareIntent = Intent(Intent.ACTION_SEND)
+        val currentTodoTitle = binding.editTitleUpdate.text.toString()
+        val currentTodoDescription = binding.editDescriptionUpdate.text.toString()
+        shareIntent.putExtra(
+            Intent.EXTRA_TEXT,
+            "• $currentTodoTitle\n\n" +
+                    currentTodoDescription
+        )
+        shareIntent.type = "text/plain"
+        startActivity(
+            Intent.createChooser(
+                shareIntent,
+                "Choose the app you want to share todo with:"
+            )
+        )
     }
 
     private fun deleteTodoItem() {

@@ -33,6 +33,7 @@
     <string name="developed_by_seif_mohamed_dialog">Developed by: Seif Mohamed</string>
     <string name="ok_about_dialog">OK</string>
     <string name="todo_image_desc">header image</string>
+    <string name="share_menu_todo">Share</string>
     <string-array name="spinner_items">
         <item>High Priority</item>
         <item>Medium Priority</item>
