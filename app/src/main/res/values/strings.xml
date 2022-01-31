@@ -34,6 +34,8 @@
     <string name="ok_about_dialog">OK</string>
     <string name="todo_image_desc">header image</string>
     <string name="share_menu_todo">Share</string>
+    <string name="imgae_for_splash_screen">imgae for splash screen</string>
+    <string name="software_inversion_about">Software Inversion</string>
     <string-array name="spinner_items">
         <item>High Priority</item>
         <item>Medium Priority</item>
