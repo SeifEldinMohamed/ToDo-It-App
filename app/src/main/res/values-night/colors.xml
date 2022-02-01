@@ -20,7 +20,7 @@
 
     <color name="todoTitleTextColor">@color/white</color>
     <color name="todoDescriptionTextColor">@color/lightGray</color>
-    <drawable name="nav_header_image">@drawable/todo_niight</drawable>
+    <drawable name="nav_header_image">@drawable/nav_image_header_dark</drawable>
     <color name="nav_header_background">@color/black</color>
 
     <color name="nav_item_text_color">#FFFFFF</color>

@@ -21,7 +21,7 @@
 
     <color name="todoTitleTextColor">@color/black</color>
     <color name="todoDescriptionTextColor">@color/darkGray</color>
-    <drawable name="nav_header_image">@drawable/app_icon</drawable>
+    <drawable name="nav_header_image">@drawable/nav_header_image_light</drawable>
     <color name="nav_header_background">@color/colorPrimaryDark</color>
 
     <color name="nav_item_text_color">#000000</color>
