@@ -20,6 +20,7 @@ class MainActivity : AppCompatActivity(), NavigationView.OnNavigationItemSelecte
     private var appBarConfiguration: AppBarConfiguration? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
+        setTheme(R.style.Theme_ToDoIt)
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 

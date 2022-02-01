@@ -24,7 +24,6 @@ class TodoListAdapter() : RecyclerView.Adapter<TodoListAdapter.MyViewHolder>() {
         fun bind(position: Int, todoList: List<TodoModel>) {
             binding.todoTitleTxt.text = todoList[position].title
             binding.todoDescriptionTxt.text = todoList[position].description
-
             binding.todoItemCons.setOnClickListener {
                 val action = ToDoListFragmentDirections
                     .actionToDoListFragmentToUpdateTodoFragment(todoList[position])

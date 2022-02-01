@@ -3,7 +3,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/splashFragment">
+    app:startDestination="@id/toDoListFragment">
 
     <fragment
         android:id="@+id/toDoListFragment"
@@ -53,14 +53,5 @@
         <argument
             android:name="currentTodo"
             app:argType="com.seif.todoit.data.models.TodoModel" />
-    </fragment>
-    <fragment
-        android:id="@+id/splashFragment"
-        android:name="com.seif.todoit.ui.fragments.SplashFragment"
-        android:label="fragment_splash"
-        tools:layout="@layout/fragment_splash" >
-        <action
-            android:id="@+id/action_splashFragment_to_toDoListFragment"
-            app:destination="@id/toDoListFragment" />
     </fragment>
 </navigation>
