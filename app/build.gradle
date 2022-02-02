@@ -74,4 +74,7 @@ dependencies {
     // Recycler Animator
     implementation 'jp.wasabeef:recyclerview-animators:4.0.2'
 
+    // Show Case View
+    implementation 'com.github.mreram:showcaseview:1.4.0'
+
 }

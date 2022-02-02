@@ -26,9 +26,11 @@ import com.seif.todoit.utils.hideKeyboard
 import com.seif.todoit.veiwModel.ShareViewModel
 import com.seif.todoit.veiwModel.TodoViewModel
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator
+import smartdevelop.ir.eram.showcaseviewlib.GuideView
+import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
 
 
-class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
+class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var binding: FragmentToDoListBinding
     private val todoListAdapter: TodoListAdapter by lazy { TodoListAdapter() }
     lateinit var todoViewModel: TodoViewModel
@@ -63,6 +65,9 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
+
+
+
         // set menu
         setHasOptionsMenu(true)
         hideKeyboard(requireActivity())
@@ -90,6 +95,10 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener{
         val searchView = searchItem.actionView as? SearchView
         searchView?.isSubmitButtonEnabled = true // Enables showing a submit button when the query is non-empty
         searchView?.setOnQueryTextListener(this)
+       val themeView:MenuItem = requireView().findViewById(R.id.theme)
+
+        todoViewModel.showCaseAddNewTodo(binding.btnAddTodo, searchView!!,themeView.actionView, requireContext())
+
     }
 
     // called when to change icon of dark mode according to the current mode state
