@@ -55,43 +55,43 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     fun sortByPriorityLow():LiveData<List<TodoModel>>{
         return repository.sortByPriorityLow()
     }
-    fun showCaseAddNewTodo(view: View,view2: View,view3: View, context: Context){
-        GuideView.Builder(context)
-            .setTitle("New Todo")
-            .setContentText("Click here to navigate for new note page so you can add new note")
-            .setDismissType(DismissType.anywhere) //optional - default DismissType.targetView
-            .setTargetView(view)
-            .setContentTextSize(14)//optional
-            .setTitleTextSize(16)//optional
-            .setGuideListener {
-                showCaseSearch(view2,view3,context)
-            }
-            .build()
-            .show()
-    }
-    private fun showCaseSearch(view: View, view2: View, context: Context){
-        GuideView.Builder(context)
-            .setTitle("Search for Todo")
-            .setContentText("Click here to navigate for new note page so you can add new note")
-            .setDismissType(DismissType.anywhere) //optional - default DismissType.targetView
-            .setTargetView(view)
-            .setContentTextSize(12)//optional
-            .setTitleTextSize(14)//optional
-            .setGuideListener{
-                showCaseDarkMode(view2,context)
-            }
-            .build()
-            .show()
-    }
-    private fun showCaseDarkMode(view: View, context: Context){
-        GuideView.Builder(context)
-            .setTitle("Dark Mode")
-            .setContentText("Click here to activate Dark mode")
-            .setDismissType(DismissType.anywhere) //optional - default DismissType.targetView
-            .setTargetView(view)
-            .setContentTextSize(12)//optional
-            .setTitleTextSize(14)//optional
-            .build()
-            .show()
-    }
+//    fun showCaseAddNewTodo(view: View,view2: View,view3: View, context: Context){
+//        GuideView.Builder(context)
+//            .setTitle("Add new note")
+//            .setContentText("Click here to navigate for new note page so you can add new note")
+//            .setDismissType(DismissType.anywhere) //optional - default DismissType.targetView
+//            .setTargetView(view)
+//            .setContentTextSize(14)//optional
+//            .setTitleTextSize(16)//optional
+//            .setGuideListener {
+//                showCaseSearch(view2,view3,context)
+//            }
+//            .build()
+//            .show()
+//    }
+//    private fun showCaseSearch(view: View, view2: View, context: Context){
+//        GuideView.Builder(context)
+//            .setTitle("Search for note")
+//            .setContentText("Click here to navigate for new note page so you can add new note")
+//            .setDismissType(DismissType.anywhere) //optional - default DismissType.targetView
+//            .setTargetView(view)
+//            .setContentTextSize(12)//optional
+//            .setTitleTextSize(14)//optional
+//            .setGuideListener{
+//                showCaseDarkMode(view2,context)
+//            }
+//            .build()
+//            .show()
+//    }
+//    private fun showCaseDarkMode(view: View, context: Context){
+//        GuideView.Builder(context)
+//            .setTitle("Dark Mode")
+//            .setContentText("Click here to activate Dark mode")
+//            .setDismissType(DismissType.anywhere) //optional - default DismissType.targetView
+//            .setTargetView(view)
+//            .setContentTextSize(12)//optional
+//            .setTitleTextSize(14)//optional
+//            .build()
+//            .show()
+//    }
 }

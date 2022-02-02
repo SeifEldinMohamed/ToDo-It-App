@@ -5,8 +5,10 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
+import android.widget.ActionMenuView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
+import androidx.appcompat.view.menu.MenuView
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
@@ -95,9 +97,6 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
         val searchView = searchItem.actionView as? SearchView
         searchView?.isSubmitButtonEnabled = true // Enables showing a submit button when the query is non-empty
         searchView?.setOnQueryTextListener(this)
-       val themeView:MenuItem = requireView().findViewById(R.id.theme)
-
-        todoViewModel.showCaseAddNewTodo(binding.btnAddTodo, searchView!!,themeView.actionView, requireContext())
 
     }
 
