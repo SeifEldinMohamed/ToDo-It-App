@@ -67,9 +67,7 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
 
-
-
-
+        todoViewModel.checkForAppUpdate(requireContext())
         // set menu
         setHasOptionsMenu(true)
         hideKeyboard(requireActivity())
