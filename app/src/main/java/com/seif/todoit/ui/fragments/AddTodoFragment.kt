@@ -22,7 +22,7 @@ class AddTodoFragment : Fragment() {
     private lateinit var todoViewModel:TodoViewModel
     private lateinit var sharedViewModel:ShareViewModel
     private var mInterstitialAd: InterstitialAd? = null
-    private  var TAG = "MainActivity"
+    private  var TAG = "AddTodoFragment"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

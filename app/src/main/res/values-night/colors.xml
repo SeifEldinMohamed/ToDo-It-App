@@ -27,6 +27,8 @@
     <color name="nav_background_color">#1B1B1B</color>
     <color name="noTasks_image_color">@color/white</color>
     <color name="noTasks_text_Color">#B7B7B7</color>
+    <color name="about_background">#262626</color>
+
 
 
 

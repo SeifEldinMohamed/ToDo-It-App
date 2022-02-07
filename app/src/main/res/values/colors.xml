@@ -28,5 +28,7 @@
     <color name="nav_background_color">#FFFCFC</color>
     <color name="noTasks_image_color">#FF000000</color>
     <color name="noTasks_text_Color">@color/black</color>
+    <color name="about_background">@color/colorPrimaryDark</color>
+
 
 </resources>
