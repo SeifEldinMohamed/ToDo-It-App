@@ -39,8 +39,8 @@
     <string name="nav_image_header">nav_image_header</string>
 
 
-    <string name="banner_home_ad">ca-app-pub-9282344972847669/1945714900</string>
-    <string name="interstitial_ad">ca-app-pub-9282344972847669/4498698384</string>
+    <string name="banner_ad">ca-app-pub-3940256099942544/6300978111</string>
+    <string name="interstitial_ad">ca-app-pub-3940256099942544/8691691433</string>
 
     <string-array name="spinner_items">
         <item>High Priority</item>

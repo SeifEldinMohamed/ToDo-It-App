@@ -32,7 +32,6 @@ import com.seif.todoit.veiwModel.TodoViewModel
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator
 
 
-
 class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
     private lateinit var binding: FragmentToDoListBinding
     private val todoListAdapter: TodoListAdapter by lazy { TodoListAdapter() }
@@ -72,7 +71,6 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
         val adRequest = AdRequest.Builder().build()
         binding.adViewHome.loadAd(adRequest)
 
-
         todoViewModel.checkForAppUpdate(requireContext())
         // set menu
         setHasOptionsMenu(true)
@@ -99,9 +97,9 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
         // search
         val searchItem = menu.findItem(R.id.menu_search)
         val searchView = searchItem.actionView as? SearchView
-        searchView?.isSubmitButtonEnabled = true // Enables showing a submit button when the query is non-empty
+        searchView?.isSubmitButtonEnabled =
+            true // Enables showing a submit button when the query is non-empty
         searchView?.setOnQueryTextListener(this)
-
     }
 
     // called when to change icon of dark mode according to the current mode state
@@ -210,7 +208,8 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
         val builder = AlertDialog.Builder(requireContext())
         builder.setPositiveButton("Ok") { _, _ ->
             todoViewModel.deleteAllToDos()
-            Toast.makeText(requireContext(), "Delete all items successfully", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "Delete all items successfully", Toast.LENGTH_SHORT)
+                .show()
         }
         with(builder) {
             setNegativeButton("Cancel") { _, _ -> }

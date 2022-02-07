@@ -25,8 +25,7 @@ class UpdateTodoFragment : Fragment() {
     private lateinit var shareViewModel: ShareViewModel
     private lateinit var todoViewModel: TodoViewModel
     private var mInterstitialAd: InterstitialAd? = null
-    private  var TAG = "UpdateTodoFragment"
-
+    private var TAG = "UpdateTodoFragment"
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -40,7 +39,6 @@ class UpdateTodoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         shareViewModel = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
         todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
-
         // banner ad
         MobileAds.initialize(requireContext()) {}
         val adRequest = AdRequest.Builder().build()
@@ -57,21 +55,22 @@ class UpdateTodoFragment : Fragment() {
             )
         )
         binding.spinnerUpdate.onItemSelectedListener = shareViewModel.listener
-
-        // intersttial ad
+        // interstitial ad
         val adRequest2 = AdRequest.Builder().build()
-
-        InterstitialAd.load(requireContext(),"ca-app-pub-3940256099942544/1033173712", adRequest2, object : InterstitialAdLoadCallback() {
-            override fun onAdFailedToLoad(adError: LoadAdError) {
-                Log.d(TAG, adError.message)
-                mInterstitialAd = null
-            }
-
-            override fun onAdLoaded(interstitialAd: InterstitialAd) {
-                Log.d(TAG, "Ad was loaded.")
-                mInterstitialAd = interstitialAd
-            }
-        })
+        InterstitialAd.load(
+            requireContext(),
+            getString(R.string.interstitial_ad),
+            adRequest2,
+            object : InterstitialAdLoadCallback() {
+                override fun onAdFailedToLoad(adError: LoadAdError) {
+                    Log.d(TAG, adError.message)
+                    mInterstitialAd = null
+                }
+                override fun onAdLoaded(interstitialAd: InterstitialAd) {
+                    Log.d(TAG, "Ad was loaded.")
+                    mInterstitialAd = interstitialAd
+                }
+            })
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -132,7 +131,7 @@ class UpdateTodoFragment : Fragment() {
             } else {
                 Log.d("TAG", "The interstitial ad wasn't ready yet.")
             }
-            mInterstitialAd?.fullScreenContentCallback = object: FullScreenContentCallback() {
+            mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
                     Log.d(TAG, "Ad was dismissed.")
                     // update in database
@@ -144,7 +143,8 @@ class UpdateTodoFragment : Fragment() {
                     )
                     todoViewModel.updateTodo(updateTodo)
                     findNavController().navigate(R.id.action_updateTodoFragment_to_toDoListFragment)
-                    Toast.makeText(requireContext(), "Updated Successfully", Toast.LENGTH_SHORT).show()
+                    Toast.makeText(requireContext(), "Updated Successfully", Toast.LENGTH_SHORT)
+                        .show()
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
@@ -156,7 +156,6 @@ class UpdateTodoFragment : Fragment() {
                     mInterstitialAd = null
                 }
             }
-
         } else {
             Toast.makeText(requireContext(), "please fill all fields", Toast.LENGTH_SHORT).show()
         }
