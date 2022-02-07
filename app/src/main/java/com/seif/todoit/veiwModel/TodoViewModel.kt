@@ -5,7 +5,6 @@ import android.content.Context
 import android.content.IntentSender
 import android.net.ConnectivityManager
 import android.util.Log
-import androidx.core.content.ContextCompat
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -24,7 +23,6 @@ import com.seif.todoit.data.repository.RepositoryImplementation
 import com.seif.todoit.ui.fragments.ToDoListFragment
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
-import java.net.InetAddress
 
 class TodoViewModel(application: Application) : AndroidViewModel(application) {
     private val todoDao = TodoDatabase.getInstance(application).todoDao()
@@ -71,46 +69,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
     fun sortByPriorityLow():LiveData<List<TodoModel>>{
         return repository.sortByPriorityLow()
     }
-//    fun showCaseAddNewTodo(view: View,view2: View,view3: View, context: Context){
-//        GuideView.Builder(context)
-//            .setTitle("Add new note")
-//            .setContentText("Click here to navigate for new note page so you can add new note")
-//            .setDismissType(DismissType.anywhere) //optional - default DismissType.targetView
-//            .setTargetView(view)
-//            .setContentTextSize(14)//optional
-//            .setTitleTextSize(16)//optional
-//            .setGuideListener {
-//                showCaseSearch(view2,view3,context)
-//            }
-//            .build()
-//            .show()
-//    }
-//    private fun showCaseSearch(view: View, view2: View, context: Context){
-//        GuideView.Builder(context)
-//            .setTitle("Search for note")
-//            .setContentText("Click here to navigate for new note page so you can add new note")
-//            .setDismissType(DismissType.anywhere) //optional - default DismissType.targetView
-//            .setTargetView(view)
-//            .setContentTextSize(12)//optional
-//            .setTitleTextSize(14)//optional
-//            .setGuideListener{
-//                showCaseDarkMode(view2,context)
-//            }
-//            .build()
-//            .show()
-//    }
-//    private fun showCaseDarkMode(view: View, context: Context){
-//        GuideView.Builder(context)
-//            .setTitle("Dark Mode")
-//            .setContentText("Click here to activate Dark mode")
-//            .setDismissType(DismissType.anywhere) //optional - default DismissType.targetView
-//            .setTargetView(view)
-//            .setContentTextSize(12)//optional
-//            .setTitleTextSize(14)//optional
-//            .build()
-//            .show()
-//    }
-
 
     fun checkForAppUpdate(context: Context) {
         if (isNetworkConnected(context) ){
@@ -169,7 +127,6 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         updateStateMessage.value = "An update has just been downloaded."
     }
 
-
     private fun unregisterInstallStateUpdListener() {
         if (appUpdateManager != null && installStateUpdatedListener != null) appUpdateManager!!.unregisterListener(
             installStateUpdatedListener!!
@@ -182,5 +139,4 @@ class TodoViewModel(application: Application) : AndroidViewModel(application) {
         Log.d(TAG, "isNetworkConnected: $isInternet")
         return isInternet
     }
-
 }

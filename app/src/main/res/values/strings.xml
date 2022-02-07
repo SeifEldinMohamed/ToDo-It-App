@@ -37,6 +37,11 @@
     <string name="imgae_for_splash_screen">imgae for splash screen</string>
     <string name="software_inversion_about">Software Inversion</string>
     <string name="nav_image_header">nav_image_header</string>
+
+
+    <string name="banner_home_ad">ca-app-pub-9282344972847669/1945714900</string>
+    <string name="interstitial_ad">ca-app-pub-9282344972847669/4498698384</string>
+
     <string-array name="spinner_items">
         <item>High Priority</item>
         <item>Medium Priority</item>

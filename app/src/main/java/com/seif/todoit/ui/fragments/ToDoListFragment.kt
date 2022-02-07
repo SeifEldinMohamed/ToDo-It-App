@@ -5,10 +5,8 @@ import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
 import android.view.*
-import android.widget.ActionMenuView
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatDelegate
-import androidx.appcompat.view.menu.MenuView
 import androidx.appcompat.widget.SearchView
 import androidx.core.view.get
 import androidx.fragment.app.Fragment
@@ -18,6 +16,10 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
+import com.google.android.gms.ads.AdListener
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.LoadAdError
+import com.google.android.gms.ads.MobileAds
 import com.google.android.material.snackbar.Snackbar
 import com.seif.todoit.R
 import com.seif.todoit.data.models.TodoModel
@@ -28,8 +30,7 @@ import com.seif.todoit.utils.hideKeyboard
 import com.seif.todoit.veiwModel.ShareViewModel
 import com.seif.todoit.veiwModel.TodoViewModel
 import jp.wasabeef.recyclerview.animators.ScaleInTopAnimator
-import smartdevelop.ir.eram.showcaseviewlib.GuideView
-import smartdevelop.ir.eram.showcaseviewlib.config.DismissType
+
 
 
 class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
@@ -66,6 +67,11 @@ class ToDoListFragment : Fragment(), SearchView.OnQueryTextListener {
         } else {
             AppCompatDelegate.setDefaultNightMode(AppCompatDelegate.MODE_NIGHT_NO)
         }
+        // banner ad
+        MobileAds.initialize(requireContext()) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.adViewHome.loadAd(adRequest)
+
 
         todoViewModel.checkForAppUpdate(requireContext())
         // set menu

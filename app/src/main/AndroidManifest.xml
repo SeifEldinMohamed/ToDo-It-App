@@ -11,6 +11,9 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/SplashScreenStyle">
+        <meta-data
+            android:name="com.google.android.gms.ads.APPLICATION_ID"
+            android:value="ca-app-pub-9282344972847669~4002098260"/>
         <activity
             android:name=".MainActivity"
             android:windowSoftInputMode="adjustPan">

@@ -8,6 +8,8 @@ import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import com.google.android.gms.ads.AdRequest
+import com.google.android.gms.ads.MobileAds
 import com.seif.todoit.R
 import com.seif.todoit.data.models.TodoModel
 import com.seif.todoit.databinding.FragmentUpdateTodoBinding
@@ -33,6 +35,11 @@ class UpdateTodoFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
         shareViewModel = ViewModelProvider(requireActivity())[ShareViewModel::class.java]
         todoViewModel = ViewModelProvider(requireActivity())[TodoViewModel::class.java]
+
+        // banner ad
+        MobileAds.initialize(requireContext()) {}
+        val adRequest = AdRequest.Builder().build()
+        binding.adViewUpdate.loadAd(adRequest)
         // set Menu
         setHasOptionsMenu(true)
         binding.editTitleUpdate.setText(fromBundle(requireArguments()).currentTodo.title)
