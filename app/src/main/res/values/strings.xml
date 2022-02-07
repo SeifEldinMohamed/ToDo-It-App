@@ -4,7 +4,7 @@
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="no_tasks_enjoy_your_time">No Tasks, Enjoy Your Time</string>
     <string name="image_when_there_is_no_tasks">image when there is no tasks</string>
-    <string name="icon_in_flaating_action_botton">icon in flaating action botton</string>
+    <string name="icon_in_floating_action_button">icon in floating action button</string>
     <string name="hint_title">Title</string>
     <string name="hint_description">Description</string>
     <string name="study_title_test">Study</string>
@@ -34,7 +34,7 @@
     <string name="ok_about_dialog">OK</string>
     <string name="todo_image_desc">header image</string>
     <string name="share_menu_todo">Share</string>
-    <string name="imgae_for_splash_screen">imgae for splash screen</string>
+    <string name="image_for_splash_screen">image for splash screen</string>
     <string name="software_inversion_about">Software Inversion</string>
     <string name="nav_image_header">nav_image_header</string>
 

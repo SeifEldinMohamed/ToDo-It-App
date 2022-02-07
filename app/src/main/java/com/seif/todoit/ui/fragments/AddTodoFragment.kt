@@ -85,20 +85,12 @@ class AddTodoFragment : Fragment() {
                 mInterstitialAd?.show(requireActivity())
             } else {
                 Log.d("TAG", "The interstitial ad wasn't ready yet.")
+                insertTodo(todoTitle, todoDescription, priority)
             }
             mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
                     Log.d(TAG, "Ad was dismissed.")
-                    // insert in database
-                    val todo = TodoModel(
-                        0,
-                        todoTitle,
-                        sharedViewModel.getPriority(priority),
-                        todoDescription
-                    )
-                    todoViewModel.insertTodo(todo)
-                    Toast.makeText(context, "successfully added", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(R.id.action_addTodoFragment_to_toDoListFragment)
+                    insertTodo(todoTitle, todoDescription, priority)
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
@@ -114,4 +106,19 @@ class AddTodoFragment : Fragment() {
             Toast.makeText(context, "please fill out all the fields", Toast.LENGTH_SHORT).show()
         }
     }
+
+    private fun insertTodo(todoTitle: String, todoDescription: String, priority: String) {
+        // insert in database
+        val todo = TodoModel(
+            0,
+            todoTitle,
+            sharedViewModel.getPriority(priority),
+            todoDescription
+        )
+        todoViewModel.insertTodo(todo)
+        Toast.makeText(context, "successfully added", Toast.LENGTH_SHORT).show()
+        findNavController().navigate(R.id.action_addTodoFragment_to_toDoListFragment)
+    }
+
+
 }

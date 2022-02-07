@@ -83,7 +83,6 @@ class UpdateTodoFragment : Fragment() {
             R.id.menu_share_todo -> shareTodo()
             R.id.menu_delete -> deleteTodoItem()
         }
-
         return super.onOptionsItemSelected(item)
     }
 
@@ -130,21 +129,12 @@ class UpdateTodoFragment : Fragment() {
                 mInterstitialAd?.show(requireActivity())
             } else {
                 Log.d("TAG", "The interstitial ad wasn't ready yet.")
+                updateTodo(currentTitle, currentDescription, currentPriority)
             }
             mInterstitialAd?.fullScreenContentCallback = object : FullScreenContentCallback() {
                 override fun onAdDismissedFullScreenContent() {
                     Log.d(TAG, "Ad was dismissed.")
-                    // update in database
-                    val updateTodo = TodoModel(
-                        fromBundle(requireArguments()).currentTodo.id,
-                        currentTitle,
-                        shareViewModel.getPriority(currentPriority),
-                        currentDescription
-                    )
-                    todoViewModel.updateTodo(updateTodo)
-                    findNavController().navigate(R.id.action_updateTodoFragment_to_toDoListFragment)
-                    Toast.makeText(requireContext(), "Updated Successfully", Toast.LENGTH_SHORT)
-                        .show()
+                    updateTodo(currentTitle, currentDescription, currentPriority)
                 }
 
                 override fun onAdFailedToShowFullScreenContent(adError: AdError?) {
@@ -156,8 +146,27 @@ class UpdateTodoFragment : Fragment() {
                     mInterstitialAd = null
                 }
             }
-        } else {
+        }
+        else {
             Toast.makeText(requireContext(), "please fill all fields", Toast.LENGTH_SHORT).show()
         }
+    }
+
+    private fun updateTodo(
+        currentTitle: String,
+        currentDescription: String,
+        currentPriority: String
+    ) {
+        // update in database
+        val updateTodo = TodoModel(
+            fromBundle(requireArguments()).currentTodo.id,
+            currentTitle,
+            shareViewModel.getPriority(currentPriority),
+            currentDescription
+        )
+        todoViewModel.updateTodo(updateTodo)
+        findNavController().navigate(R.id.action_updateTodoFragment_to_toDoListFragment)
+        Toast.makeText(requireContext(), "Updated Successfully", Toast.LENGTH_SHORT)
+            .show()
     }
 }

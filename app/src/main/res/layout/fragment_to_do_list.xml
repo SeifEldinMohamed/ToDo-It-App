@@ -28,7 +28,7 @@
         android:layout_marginBottom="24dp"
         android:backgroundTint="@color/colorPrimary"
         android:clickable="true"
-        android:contentDescription="@string/icon_in_flaating_action_botton"
+        android:contentDescription="@string/icon_in_floating_action_button"
         android:focusable="true"
         android:src="@drawable/ic_plus"
         app:layout_constraintBottom_toBottomOf="@+id/recyclerView"

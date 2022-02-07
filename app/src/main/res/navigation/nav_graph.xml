@@ -8,7 +8,7 @@
     <fragment
         android:id="@+id/toDoListFragment"
         android:name="com.seif.todoit.ui.fragments.ToDoListFragment"
-        android:label="Todo It"
+        android:label="ToDo It"
         tools:layout="@layout/fragment_to_do_list" >
         <action
             android:id="@+id/action_toDoListFragment_to_addTodoFragment"
@@ -28,7 +28,7 @@
     <fragment
         android:id="@+id/addTodoFragment"
         android:name="com.seif.todoit.ui.fragments.AddTodoFragment"
-        android:label="Todo It"
+        android:label="Add ToDo"
         tools:layout="@layout/fragment_add_todo" >
         <action
             android:id="@+id/action_addTodoFragment_to_toDoListFragment"
@@ -41,7 +41,7 @@
     <fragment
         android:id="@+id/updateTodoFragment"
         android:name="com.seif.todoit.ui.fragments.UpdateTodoFragment"
-        android:label="Todo It"
+        android:label="Update ToDo"
         tools:layout="@layout/fragment_update_todo" >
         <action
             android:id="@+id/action_updateTodoFragment_to_toDoListFragment"
