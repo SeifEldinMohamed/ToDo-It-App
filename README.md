@@ -33,5 +33,8 @@ No matter who you are and what you do - you will be better organized.
 <img src = "screenshots/screen_4.png" width = "300">
 <img src = "screenshots/screen_5.png" width = "300">
 
-[![Watch the video](https://youtu.be/JNzcBkSSn34.jpg)](https://youtu.be/JNzcBkSSn34)
+
+
+https://user-images.githubusercontent.com/67869630/153723778-7fd69c64-b1f9-43a9-abec-741793cd4ac1.mp4
+
 
