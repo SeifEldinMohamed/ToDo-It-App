@@ -14,6 +14,7 @@ No matter who you are and what you do - you will be better organized.
 5- Share your tasks with your friends.
 
 # I have used
+
 • Kotlin
 • MVVM Architecture
 • Room Database
