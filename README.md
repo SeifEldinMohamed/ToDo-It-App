@@ -2,8 +2,8 @@
 <img src = "screenshots/icon.png" width = "100">
 
 # Description
-ToDo It is a smart task list for everyday use.
-It is truly usable with a great user experience.
+ToDo It is a smart task list for everyday use.<br />
+It is truly usable with a great user experience.<br />
 No matter who you are and what you do - you will be better organized.
 
 # You Can:
@@ -14,17 +14,17 @@ No matter who you are and what you do - you will be better organized.
 5- Share your tasks with your friends.<br />
 
 # I have used
-• Kotlin
-• MVVM Architecture
-• Room Database
-• Navigation Components
-• Coroutines
-• LiveData
-• Recycler View + Diff Util + Recycler Animator
-• Shared Preference
-• View Binding
-• Search View
-• I used the principle of single Activity and multiple fragments in the app
+• Kotlin<br />
+• MVVM Architecture<br />
+• Room Database<br />
+• Navigation Components<br />
+• Coroutines<br />
+• LiveData<br />
+• Recycler View + Diff Util + Recycler Animator<br />
+• Shared Preference<br />
+• View Binding<br />
+• Search View<br />
+• I used the principle of single Activity and multiple fragments in the app<br />
 
 # Screen Shots
 <img src = "screenshots/screen_1.png" width = "300">
