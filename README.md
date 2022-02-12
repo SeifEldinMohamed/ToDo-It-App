@@ -7,8 +7,8 @@ It is truly usable with a great user experience.
 No matter who you are and what you do - you will be better organized.
 
 # You Can:
-1- Sort the todos by its priority.
-2- Search by todo title.
+1- Sort the todos by its priority.\n
+2- Search by todo title.\n
 3- Edit the todo content or priority.
 4- Delete the todo.
 5- Share your tasks with your friends.
