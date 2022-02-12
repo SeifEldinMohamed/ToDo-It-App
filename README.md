@@ -17,7 +17,7 @@
 • Kotlin<br />
 • MVVM Architecture<br />
 • Room Database<br />
-• Navigation Components<br />
+• Navigation Component<br />
 • Coroutines<br />
 • LiveData<br />
 • Recycler View + Diff Util + Recycler Animator<br />
