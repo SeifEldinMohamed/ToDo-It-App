@@ -2,9 +2,9 @@
 <img src = "screenshots/icon.png" width = "100">
 
 # Description
-ToDo It is a smart task list for everyday use.<br />
-It is truly usable with a great user experience.<br />
-No matter who you are and what you do - you will be better organized.
+• ToDo It is a smart task list for everyday use.<br />
+• It is truly usable with a great user experience.<br />
+• No matter who you are and what you do - you will be better organized.
 
 # You Can:
 1- Sort the todos by its priority.<br />
@@ -35,6 +35,8 @@ No matter who you are and what you do - you will be better organized.
 
 
 
-https://user-images.githubusercontent.com/67869630/153723778-7fd69c64-b1f9-43a9-abec-741793cd4ac1.mp4
+
+https://user-images.githubusercontent.com/67869630/153723834-2c2e2ba8-a4c5-4fdb-a567-bedd7352de33.mp4
+
 
 
