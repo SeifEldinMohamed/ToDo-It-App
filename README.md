@@ -13,7 +13,7 @@ No matter who you are and what you do - you will be better organized.
 4- Delete the todo.<br />
 5- Share your tasks with your friends.<br />
 
-# I have used
+# Built with:
 • Kotlin<br />
 • MVVM Architecture<br />
 • Room Database<br />
@@ -32,3 +32,6 @@ No matter who you are and what you do - you will be better organized.
 <img src = "screenshots/screen_3.png" width = "300">
 <img src = "screenshots/screen_4.png" width = "300">
 <img src = "screenshots/screen_5.png" width = "300">
+
+[![Watch the video](https://youtu.be/JNzcBkSSn34.jpg)](https://youtu.be/JNzcBkSSn34)
+
