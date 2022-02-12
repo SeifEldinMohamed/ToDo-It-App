@@ -27,8 +27,8 @@ No matter who you are and what you do - you will be better organized.
 • I used the principle of single Activity and multiple fragments in the app
 
 # Screen Shots
-<img src = "screenshots/screen_1.jpeg" width = "300">
-<img src = "screenshots/screen_2.jpeg" width = "300">
-<img src = "screenshots/screen_3.jpeg" width = "300">
-<img src = "screenshots/screen_4.jpeg" width = "300">
-<img src = "screenshots/screen_5.jpeg" width = "300">
+<img src = "screenshots/screen_1.png" width = "300">
+<img src = "screenshots/screen_2.png" width = "300">
+<img src = "screenshots/screen_3.png" width = "300">
+<img src = "screenshots/screen_4.png" width = "300">
+<img src = "screenshots/screen_5.png" width = "300">
